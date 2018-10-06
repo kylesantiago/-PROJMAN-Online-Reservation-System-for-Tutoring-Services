@@ -1,0 +1,23 @@
+{
+  "name": "-projman-online-reservation-system-for-tutoring-services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylesantiago/-PROJMAN-Online-Reservation-System-for-Tutoring-Services.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylesantiago/-PROJMAN-Online-Reservation-System-for-Tutoring-Services/issues"
+  },
+  "homepage": "https://github.com/kylesantiago/-PROJMAN-Online-Reservation-System-for-Tutoring-Services#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
