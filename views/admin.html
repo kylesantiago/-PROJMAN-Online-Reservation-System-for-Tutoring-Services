@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../private/bootstrap4.1/css/bootstrap.min.css"> 
+        <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
+        <script src="../private/bootstrap4.1/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="../private/custom.css">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+
+        <script src="../private/jquery.min.js"></script>
+        <link href="../private/simple-sidebar.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div id="wrapper" class="toggled">
+            <div id="sidebar-wrapper" class="bg-primary">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">    
+                        <img src="../private/logo_white.png" width="100" height="100" class="logo">
+                        <a href="#">
+                            Welcome back, <span>Admin</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a class="active" href="#">Schedule</a>
+                    </li>
+                    <li>
+                        <a href="#">Manage Reservations</a>
+                    </li>
+                    <li>
+                        <a href="#">Manage Tutees</a>
+                    </li>
+                    <li>
+                        <a href="#">Manage Billing</a>
+                    </li>
+                    <li>
+                        <a href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <h1>Simple Sidebar</h1>
+                    <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                </div>
+            </div>
+            <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle"><i class="far fa-eye"></i></a>
+        </div>
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        </script>
+    </body>
+</html>
