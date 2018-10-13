@@ -8,6 +8,82 @@
         <script src="../private/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
+<!--   This is for the calendar    -->
+        <style>
+            ul {list-style-type: none;}
+            body {font-family: Verdana, sans-serif;}
+            /* Month header */
+            .month {
+                padding: 70px 25px;
+                width: 100%;
+                background: #1abc9c;
+                text-align: center;
+            }
+
+            /* Month list */
+            .month ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .month ul li {
+                color: white;
+                font-size: 20px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+            }
+
+            /* Previous button inside month header */
+            .month #prev {
+                float: left;
+                padding-top: 10px;
+            }
+
+            /* Next button */
+            .month #next {
+                float: right;
+                padding-top: 10px;
+            }
+
+            /* Weekdays (Mon-Sun) */
+            .weekdays {
+                margin: 0;
+                padding: 10px 0;
+                background-color:#ddd;
+            }
+
+            .weekdays li {
+                display: inline-block;
+                width: 13.6%;
+                color: #666;
+                text-align: center;
+            }
+
+            /* Days (1-31) */
+            .days {
+                padding: 10px 0;
+                background: #eee;
+                margin: 0;
+                height: 100%;
+            }
+
+            .days li {
+                list-style-type: none;
+                display: inline-block;
+                width: 14%;
+                text-align: center;
+                margin-bottom: 5px;
+                font-size:14px;
+                color: #777;
+            }
+
+            /* Highlight the "current" day */
+            .days li .active {
+                padding: 5px;
+                background: #1abc9c;
+                color: white !important;
+            }
+        </style>
     </head>
     <body>
         <div class="row">
@@ -19,7 +95,7 @@
                             Welcome back,<br/><span>Admin</span>
                         </a>
                     </li>
-                    <a class="nav-link active" data-toggle="tab" href="#adminSchedule">Schedule</a>
+                    <a id = "Schedule" class="nav-link active" data-toggle="tab" href="#adminSchedule">Schedule</a>
                     <a class="nav-link" data-toggle="tab" href="#adminRes">Manage Reservations</a>
                     <a class="nav-link" data-toggle="tab" href="#adminTutees">Manage Tutees</a>
                     <a class="nav-link" data-toggle="tab" href="#adminBilling">Manage Billing</a>
@@ -28,7 +104,28 @@
             </div>
             <div class="col-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="adminSchedule">schedule</div>
+                    <div class="tab-pane fade show active" id="adminSchedule">
+                        <div class="month"> 
+                          <ul>
+                            <li id="prev" style="cursor: pointer">&#10094;</li>
+                            <li id="next" style="cursor: pointer">&#10095;</li>
+                            <li id="monthName">August<br><span style="font-size:18px">2017</span></li>
+                          </ul>
+                        </div>
+
+                        <ul class="weekdays">
+                            <li>Sunday</li>
+                            <li>Monday</li>
+                            <li>Tuesday</li>
+                            <li>Wednesday</li>
+                            <li>Thursday</li>
+                            <li>Friday</li>
+                            <li>Saturday</li>
+                        </ul>
+                        
+                        <ul class="days">
+                        </ul>
+                    </div>
                     <div class="tab-pane fade" id="adminRes">reservations</div>
                     <div class="tab-pane fade" id="adminTutees">
                         <div class="row list-box">
@@ -168,5 +265,131 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="calendarModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+            
+                    </div>
+                    <div class="modal-body">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script>
+        
+        $(document).on("click",".days li", function(){
+            $("#calendarModal .modal-header").empty();
+            console.log("Hello" + $(this).attr("id"));
+            var dateH1 = document.createElement("h1");
+            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
+            $(dateH1).append(textH1);
+            $("#calendarModal .modal-header").append(dateH1);
+            $("#calendarModal").modal("show");
+        })
+        
+        $("#Schedule").click(function(){
+            initCalendar();
+        });
+        
+        var months = new Array(12);
+        months[0] = "January";
+        months[1] = "Febuary";
+        months[2] = "March";
+        months[3] = "April";
+        months[4] = "May";
+        months[5] = "June";
+        months[6] = "July";
+        months[7] = "August";
+        months[8] = "September";
+        months[9] = "October";
+        months[10] = "November";
+        months[11] = "December";
+        
+        n = new Date();        
+        var curMonth = n.getMonth();
+        var curDay = n.getDate();
+        var curYear = n.getFullYear();
+        // This is the distance from the current month
+        var curMonthNum = curMonth;
+        var curYearNum = curYear;
+        
+        $("#prev").click(function(){
+            curMonthNum--;
+            if(curMonthNum < 0){
+                curYearNum--;
+                curMonthNum = 11;
+            }
+            setCalendar();
+        });
+        
+        $("#next").click(function(){
+            curMonthNum++;
+            if(curMonthNum > 11){
+                curYearNum++;
+                curMonthNum = 0;
+            }
+            setCalendar();
+        });
+        
+        function initCalendar(){
+            $(".days").empty();
+            nd = new Date(curYear,curMonth,1);
+            setYearAndMonth(curMonth,curYear);
+            makeSpaces(nd.getDay());
+            addDays(daysInMonth(curMonth+1,curYear));
+        }
+        
+        function setCalendar(){
+            $(".days").empty();
+            nd = new Date(curYearNum,curMonthNum,1);
+            setYearAndMonth(curMonthNum,curYearNum);
+            makeSpaces(nd.getDay());
+            addDays(daysInMonth(curMonthNum+1,curYearNum));
+        }
+        
+        function setYearAndMonth(month,year){
+            $("#monthName").empty();
+            var mon = document.createTextNode(months[month]);
+            var yer = document.createTextNode(year);
+            var brk = document.createElement("br");
+            var span = document.createElement("span");
+            $(span).attr("style","font-size:18px");
+            $("#monthName").append(mon);
+            $("#monthName").append(brk);
+            $("#monthName").append(span);
+            $("#monthName").append(yer);
+        }
+        
+        function addDays(num){
+            for(var i = 0; i < num; i++){
+                var day = document.createElement("li");
+                var text = document.createTextNode(i+1);
+                if(i+1 == curDay && curMonthNum == curMonth){
+                    var span = document.createElement("span");
+                    $(span).addClass("active");
+                    $(span).append(text);
+                    $(day).append(span);
+                }
+                else{
+                    $(day).append(text);
+                }
+                $(day).attr("id",i+1);
+                $(".days").append(day);
+            }
+        }
+        
+        function makeSpaces(num){
+            for(var i = 0; i < num; i++){
+                var blank = document.createElement("li");
+                $(".days").append(blank);
+            }
+        }
+        
+        function daysInMonth (month, year) {
+            return new Date(year, month, 0).getDate();
+        }
+    </script>
 </html>
