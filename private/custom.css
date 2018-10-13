@@ -5,13 +5,13 @@ body {
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
+@colors{
+    dark-blue:#031D40;
+}
+
 img.logo{
     display: block;
     margin:0 auto;
-}
-
-.sidebar-nav>.sidebar-brand span {
-    font-size: 30px;
 }
 
 .wrapper{
@@ -42,15 +42,130 @@ img.logo{
   background-repeat: no-repeat;
 }
 
-#sidebar-wrapper .sidebar-nav li a{
+.bg-custom, .btn-custom{
+    color:white;
+    background-color: #031D40;
+}
+
+.btn-custom:hover{
+    transition-property:all;
+    transition-duration:.5s;
+    transition-timing-function: ease;
+    background-color: #072c5d;
+}
+
+#sidebar{
+    height:100%;
+}
+
+#sidebar a{
     color:white;
 }
 
-#sidebar-wrapper .sidebar-nav .active{
-    background-color:#005bbe;
+#sidebar>a.active{
+    background-color:#003377;
 }
 
-#menu-toggle{
-    position:absolute;
-    bottom:0;
+#sidebar>a:hover{
+    background-color:#0048aa;
+}
+
+.nav>.sidebar-brand {
+    padding:30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.nav>.sidebar-brand>a:hover {
+    text-decoration: none;
+}
+
+.nav>.sidebar-brand>a>span{
+    font-size: 30px;
+}
+
+.row.list-box{
+    margin-top:8%;
+}
+
+.tuteeProfile{
+    border:1px solid #d1d1d1;
+    height:550;
+    width:450px;
+    padding:30px;
+    border-radius: 5px;
+}
+
+.list-group>a.active{
+    transition-property:all;
+    transition-duration:.2s;
+    transition-timing-function: ease;
+    background-color: #003377;
+    border-color: #003377;
+}
+
+.list-group{
+    min-height:100px;
+    max-height:450px;
+    overflow: scroll;
+}
+
+.list-box .col-5 button{
+    margin-top:10px;
+    width:147px;
+}
+
+.tuteeBtn{
+    margin-top:10px;
+    width:147px;
+    margin-right:1px;
+}
+
+#adminBilling td, th{
+    width:10%;
+}
+
+.tableDiv{
+    height:250px;
+    overflow:scroll;
+}
+
+.staticHead{
+    margin-bottom:0;
+}
+
+.paid {
+    color:#02a202;
+}
+
+.pending{
+    color:#e52727;
+}
+
+.receiptDiv{
+    height:300px;
+    margin-top:10px;
+}
+
+.card{
+    border:1px solid #d1d1d1;
+    height:100%;
+}
+
+tr.selected{
+    background-color: #003377;
+    color:white;
+}
+
+#logoutModal .modal-content{
+    text-align: center;
+    padding:20px;
+}
+
+.fas{
+    margin:5px;
+}
+
+.fa-check{
+    color:green;
 }

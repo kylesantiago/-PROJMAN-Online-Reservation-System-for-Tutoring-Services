@@ -1,56 +1,172 @@
 <html>
     <head>
         <link rel="stylesheet" href="../private/bootstrap4.1/css/bootstrap.min.css"> 
-        <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
         <script src="../private/bootstrap4.1/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="../private/custom.css">
         <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
 
         <script src="../private/jquery.min.js"></script>
-        <link href="../private/simple-sidebar.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
+        <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div id="wrapper" class="toggled">
-            <div id="sidebar-wrapper" class="bg-primary">
-                <ul class="sidebar-nav">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills bg-custom" id="sidebar">
                     <li class="sidebar-brand">    
                         <img src="../private/logo_white.png" width="100" height="100" class="logo">
                         <a href="#">
-                            Welcome back, <span>Admin</span>
+                            Welcome back,<br/><span>Admin</span>
                         </a>
                     </li>
-                    <li class="active">
-                        <a class="active" href="#">Schedule</a>
-                    </li>
-                    <li>
-                        <a href="#">Manage Reservations</a>
-                    </li>
-                    <li>
-                        <a href="#">Manage Tutees</a>
-                    </li>
-                    <li>
-                        <a href="#">Manage Billing</a>
-                    </li>
-                    <li>
-                        <a href="#">Logout</a>
-                    </li>
-                </ul>
-            </div>
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
-                    <h1>Simple Sidebar</h1>
-                    <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                    <a class="nav-link active" data-toggle="tab" href="#adminSchedule">Schedule</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminRes">Manage Reservations</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminTutees">Manage Tutees</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminBilling">Manage Billing</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#logoutModal">Logout</a>
                 </div>
             </div>
-            <a href="#menu-toggle" class="btn btn-primary" id="menu-toggle"><i class="far fa-eye"></i></a>
+            <div class="col-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="adminSchedule">schedule</div>
+                    <div class="tab-pane fade" id="adminRes">reservations</div>
+                    <div class="tab-pane fade" id="adminTutees">
+                        <div class="row list-box">
+                            <div class="col-5">
+                                <h2>Tutees</h2>
+                                <div class="list-group">
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-home">
+                                        <h4>Juan dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-profile">
+                                        <h4>Juanita dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-messages">
+                                        <h4>Isobel dela Cruz</h4>
+                                        <h6>PAREF Woodrose</h6>
+                                    </a>
+                                </div>
+                                <button class="btn btn-success">Add Account</button>
+                            </div>
+                            <div class="col-7">
+                                <div class="tab-content tuteeProfile">
+                                    <div class="tab-pane fade" id="list-home">
+                                        <h4>Juan dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-profile">
+                                        <h4>Juanita dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-messages">
+                                        <h4>Isobel dela Cruz</h4>
+                                        <h6>PAREF Woodrose</h6>
+                                    </div>
+                                </div>
+                                <button class="btn btn-custom tuteeBtn">Edit</button>
+                                <button class="btn btn-warning tuteeBtn"><i class="fas fa-coins"></i>Bill</button>
+                                <button class="btn btn-danger tuteeBtn">Disable</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="adminBilling">
+                        <div class="row list-box">
+                            <div class="col-11">
+                                <h2>Billing</h2>
+                                <table class="table staticHead">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Bill #</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Fee</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div class="tableDiv">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th>1</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr class="selected">
+                                                <th scope="row">2</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Php 1200</td>
+                                                <td class="pending">Pending</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Php 1200</td>
+                                                <td class="pending">Pending</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 receiptDiv">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Digital Receipt #2
+                                    </div>
+                                    <div class="card-body">
+                                        Name: Juanita dela Cruz<br/>
+                                        
+                                        Rate: Php1000/session<br/>
+                                        Session/s overdue: 1<br/><br/>
+                                        Total due: Php 1000<br/>
+                                        Status: Paid<i class="fas fa-check"></i><br/><br/>
+                                        <button class="btn btn-outline-danger">Revert status</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-        </script>
+
+
+        <!------ MODALS HERE ------->
+        <div class="modal fade" id="logoutModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="../private/logo_blue.png" width="100" height="100" class="logo">
+                        <h5>Are you sure you want to logout?</h5>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-custom">Logout</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>
