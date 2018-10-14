@@ -8,6 +8,7 @@
         <script src="../private/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
+        <script src="../private/weeklysched/src/index.js"></script>
 <!--   This is for the calendar    -->
         <style>
             ul {list-style-type: none;}
@@ -83,6 +84,27 @@
                 background: #1abc9c;
                 color: white !important;
             }
+            
+            .schedule-rows td {
+              width: 80px;
+              height: 30px;
+              margin: 3px;
+              padding: 5px;
+              background-color: #3498DB;
+              cursor: pointer;
+            }
+
+            .schedule-rows td:first-child {
+              background-color: transparent;
+              text-align: right;
+              position: relative;
+              top: -12px;
+            }
+
+            .schedule-rows td[data-selected],
+            .schedule-rows td[data-selecting] { background-color: #E74C3C; }
+
+            .schedule-rows td[data-disabled] { opacity: 0.55; }
         </style>
     </head>
     <body>
@@ -105,6 +127,8 @@
             <div class="col-9">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="adminSchedule">
+                        <div id="weekly-schedule"></div>
+<!--
                         <div class="month"> 
                           <ul>
                             <li id="prev" style="cursor: pointer">&#10094;</li>
@@ -125,6 +149,7 @@
                         
                         <ul class="days">
                         </ul>
+-->
                     </div>
                     <div class="tab-pane fade" id="adminRes">reservations</div>
                     <div class="tab-pane fade" id="adminTutees">
@@ -280,116 +305,124 @@
     </body>
     <script>
         
-        $(document).on("click",".days li", function(){
-            $("#calendarModal .modal-header").empty();
-            console.log("Hello" + $(this).attr("id"));
-            var dateH1 = document.createElement("h1");
-            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
-            $(dateH1).append(textH1);
-            $("#calendarModal .modal-header").append(dateH1);
-            $("#calendarModal").modal("show");
-        })
-        
-        $("#Schedule").click(function(){
-            initCalendar();
+        $("#weekly-schedule").dayScheduleSelector({
+          /*
+          OPTIONS HERE
+          */
         });
         
-        var months = new Array(12);
-        months[0] = "January";
-        months[1] = "Febuary";
-        months[2] = "March";
-        months[3] = "April";
-        months[4] = "May";
-        months[5] = "June";
-        months[6] = "July";
-        months[7] = "August";
-        months[8] = "September";
-        months[9] = "October";
-        months[10] = "November";
-        months[11] = "December";
         
-        n = new Date();        
-        var curMonth = n.getMonth();
-        var curDay = n.getDate();
-        var curYear = n.getFullYear();
-        // This is the distance from the current month
-        var curMonthNum = curMonth;
-        var curYearNum = curYear;
         
-        $("#prev").click(function(){
-            curMonthNum--;
-            if(curMonthNum < 0){
-                curYearNum--;
-                curMonthNum = 11;
-            }
-            setCalendar();
-        });
-        
-        $("#next").click(function(){
-            curMonthNum++;
-            if(curMonthNum > 11){
-                curYearNum++;
-                curMonthNum = 0;
-            }
-            setCalendar();
-        });
-        
-        function initCalendar(){
-            $(".days").empty();
-            nd = new Date(curYear,curMonth,1);
-            setYearAndMonth(curMonth,curYear);
-            makeSpaces(nd.getDay());
-            addDays(daysInMonth(curMonth+1,curYear));
-        }
-        
-        function setCalendar(){
-            $(".days").empty();
-            nd = new Date(curYearNum,curMonthNum,1);
-            setYearAndMonth(curMonthNum,curYearNum);
-            makeSpaces(nd.getDay());
-            addDays(daysInMonth(curMonthNum+1,curYearNum));
-        }
-        
-        function setYearAndMonth(month,year){
-            $("#monthName").empty();
-            var mon = document.createTextNode(months[month]);
-            var yer = document.createTextNode(year);
-            var brk = document.createElement("br");
-            var span = document.createElement("span");
-            $(span).attr("style","font-size:18px");
-            $("#monthName").append(mon);
-            $("#monthName").append(brk);
-            $("#monthName").append(span);
-            $("#monthName").append(yer);
-        }
-        
-        function addDays(num){
-            for(var i = 0; i < num; i++){
-                var day = document.createElement("li");
-                var text = document.createTextNode(i+1);
-                if(i+1 == curDay && curMonthNum == curMonth){
-                    var span = document.createElement("span");
-                    $(span).addClass("active");
-                    $(span).append(text);
-                    $(day).append(span);
-                }
-                else{
-                    $(day).append(text);
-                }
-                $(day).attr("id",i+1);
-                $(".days").append(day);
-            }
-        }
-        
-        function makeSpaces(num){
-            for(var i = 0; i < num; i++){
-                var blank = document.createElement("li");
-                $(".days").append(blank);
-            }
-        }
-        
-        function daysInMonth (month, year) {
-            return new Date(year, month, 0).getDate();
-        }
+//        $(document).on("click",".days li", function(){
+//            $("#calendarModal .modal-header").empty();
+//            console.log("Hello" + $(this).attr("id"));
+//            var dateH1 = document.createElement("h1");
+//            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
+//            $(dateH1).append(textH1);
+//            $("#calendarModal .modal-header").append(dateH1);
+//            $("#calendarModal").modal("show");
+//        })
+//        
+//        $("#Schedule").click(function(){
+//            initCalendar();
+//        });
+//        
+//        var months = new Array(12);
+//        months[0] = "January";
+//        months[1] = "Febuary";
+//        months[2] = "March";
+//        months[3] = "April";
+//        months[4] = "May";
+//        months[5] = "June";
+//        months[6] = "July";
+//        months[7] = "August";
+//        months[8] = "September";
+//        months[9] = "October";
+//        months[10] = "November";
+//        months[11] = "December";
+//        
+//        n = new Date();        
+//        var curMonth = n.getMonth();
+//        var curDay = n.getDate();
+//        var curYear = n.getFullYear();
+//        // This is the distance from the current month
+//        var curMonthNum = curMonth;
+//        var curYearNum = curYear;
+//        
+//        $("#prev").click(function(){
+//            curMonthNum--;
+//            if(curMonthNum < 0){
+//                curYearNum--;
+//                curMonthNum = 11;
+//            }
+//            setCalendar();
+//        });
+//        
+//        $("#next").click(function(){
+//            curMonthNum++;
+//            if(curMonthNum > 11){
+//                curYearNum++;
+//                curMonthNum = 0;
+//            }
+//            setCalendar();
+//        });
+//        
+//        function initCalendar(){
+//            $(".days").empty();
+//            nd = new Date(curYear,curMonth,1);
+//            setYearAndMonth(curMonth,curYear);
+//            makeSpaces(nd.getDay());
+//            addDays(daysInMonth(curMonth+1,curYear));
+//        }
+//        
+//        function setCalendar(){
+//            $(".days").empty();
+//            nd = new Date(curYearNum,curMonthNum,1);
+//            setYearAndMonth(curMonthNum,curYearNum);
+//            makeSpaces(nd.getDay());
+//            addDays(daysInMonth(curMonthNum+1,curYearNum));
+//        }
+//        
+//        function setYearAndMonth(month,year){
+//            $("#monthName").empty();
+//            var mon = document.createTextNode(months[month]);
+//            var yer = document.createTextNode(year);
+//            var brk = document.createElement("br");
+//            var span = document.createElement("span");
+//            $(span).attr("style","font-size:18px");
+//            $("#monthName").append(mon);
+//            $("#monthName").append(brk);
+//            $("#monthName").append(span);
+//            $("#monthName").append(yer);
+//        }
+//        
+//        function addDays(num){
+//            for(var i = 0; i < num; i++){
+//                var day = document.createElement("li");
+//                var text = document.createTextNode(i+1);
+//                if(i+1 == curDay && curMonthNum == curMonth){
+//                    var span = document.createElement("span");
+//                    $(span).addClass("active");
+//                    $(span).append(text);
+//                    $(day).append(span);
+//                }
+//                else{
+//                    $(day).append(text);
+//                }
+//                $(day).attr("id",i+1);
+//                $(".days").append(day);
+//            }
+//        }
+//        
+//        function makeSpaces(num){
+//            for(var i = 0; i < num; i++){
+//                var blank = document.createElement("li");
+//                $(".days").append(blank);
+//            }
+//        }
+//        
+//        function daysInMonth (month, year) {
+//            return new Date(year, month, 0).getDate();
+//        }
     </script>
 </html>
