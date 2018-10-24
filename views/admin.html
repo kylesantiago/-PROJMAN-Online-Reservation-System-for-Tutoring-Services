@@ -60,7 +60,6 @@
             .days {
                 padding: 0px 0;
                 background: #eee;
-                margin: 0;
             }
 
             .days li {
@@ -80,26 +79,6 @@
                 color: white !important;
             }
             
-            .schedule-rows td {
-              width: 80px;
-              height: 30px;
-              margin: 3px;
-              padding: 5px;
-              background-color: #3498DB;
-              cursor: pointer;
-            }
-
-            .schedule-rows td:first-child {
-              background-color: transparent;
-              text-align: right;
-              position: relative;
-              top: -12px;
-            }
-
-            .schedule-rows td[data-selected],
-            .schedule-rows td[data-selecting] { background-color: #E74C3C; }
-
-            .schedule-rows td[data-disabled] { opacity: 0.55; }
         </style>
     </head>
     <body>
@@ -135,33 +114,19 @@
                                 <ul id="time">
                                 </ul>
                             </div>
-                            <div class="col-sm">Sunday
-                                <ul id="Sunday">
-                                </ul>
+                            <div class="col-sm" id="Sunday">
                             </div>
-                            <div class="col-sm">Monday
-                                <ul id="Monday">
-                                </ul>
+                            <div class="col-sm" id="Monday">
                             </div>
-                            <div class="col-sm">Tuesday
-                                <ul id="Tuesday">
-                                </ul>
+                            <div class="col-sm" id="Tuesday">
                             </div>
-                            <div class="col-sm">Wednesday
-                                <ul id="Wednesday">
-                                </ul>
+                            <div class="col-sm" id="Wednesday">
                             </div>
-                            <div class="col-sm">Thursday
-                                <ul id="Thursday">
-                                </ul>
+                            <div class="col-sm" id="Thursday">
                             </div>
-                            <div class="col-sm">Friday
-                                <ul id="Friday">
-                                </ul>
+                            <div class="col-sm" id="Friday">
                             </div>
-                            <div class="col-sm">Saturday
-                                <ul id="Saturday">
-                                </ul>
+                            <div class="col-sm" id="Saturday">
                             </div>
                         </div>
 <!--
@@ -347,59 +312,6 @@
 //          */
 //        });
         
-        var days = new Array(7);
-        days[0] = "Sunday";
-        days[1] = "Monday";
-        days[2] = "Tuesday";
-        days[3] = "Wednesday";
-        days[4] = "Thursday";
-        days[5] = "Friday";
-        days[6] = "Saturday";
-        
-        setTime();
-        setDays();
-        
-        function setTime(){
-            $("#time").empty();
-            for(var i = 9; i < 18; i++){
-                var liTime = document.createElement("li");
-                var timeTxt = document.createTextNode(i + ":00");
-                $(liTime).append(timeTxt);
-                $("#time").append(liTime);
-            }
-        }
-        
-        function setDays(){
-            for(var i = 0; i <7; i++){
-                for(var x = 9; x < 18; x++){
-                    var liDay = document.createElement("li");
-                    var dayTxt = document.createTextNode("Free");
-                    $(liDay).addClass("days");
-                    $(liDay).attr("id",days[i] + ":" + x);
-                    $(liDay).append(dayTxt);
-                    $("#" + days[i]).append(liDay);
-                }
-            }
-        }
-        
-        $(document).on("click",".days",function(){
-            console.log("Hello " + $(this).attr("id"));
-        })
-        
-//        $(document).on("click",".days li", function(){
-//            $("#calendarModal .modal-header").empty();
-//            console.log("Hello" + $(this).attr("id"));
-//            var dateH1 = document.createElement("h1");
-//            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
-//            $(dateH1).append(textH1);
-//            $("#calendarModal .modal-header").append(dateH1);
-//            $("#calendarModal").modal("show");
-//        })
-//        
-//        $("#Schedule").click(function(){
-//            initCalendar();
-//        });
-//        
         var months = new Array(12);
         months[0] = "January";
         months[1] = "Febuary";
@@ -421,39 +333,138 @@
         // This is the distance from the current month
         var curMonthNum = curMonth;
         var curYearNum = curYear;
+        var curDayNum = curDay - n.getDay();
+        
+        var days = new Array(7);
+        days[0] = "Sunday";
+        days[1] = "Monday";
+        days[2] = "Tuesday";
+        days[3] = "Wednesday";
+        days[4] = "Thursday";
+        days[5] = "Friday";
+        days[6] = "Saturday";
+        
+        initCalendar();
+        
+        function initTime(){
+            $("#time").empty();
+            var timeStr;
+            for(var i = 8; i < 23; i++){
+                timeStr = i + ":00";
+                var liTime = document.createElement("li");
+                var timeTxt = document.createTextNode(timeStr);
+                $(liTime).append(timeTxt);
+                $("#time").append(liTime);
+                timeStr = i + ":30";
+                var liTime = document.createElement("li");
+                var timeTxt = document.createTextNode(timeStr);
+                $(liTime).append(timeTxt);
+                $("#time").append(liTime);
+            }
+        }
+        
+        function initDays(){
+            var dayName;
+            var ulDay;
+            var liDay;
+            var dayTxt;
+            var tempMonth;
+            var tempDay;
+            var timeStr;
+            for(var i = 0; i <7; i++){
+                $("#" + days[i]).empty();
+                if(curDayNum + i > daysInMonth(curMonthNum+1,curYearNum)){
+                    tempMonth = curMonthNum + 1;
+                    tempDay = curDayNum + i - daysInMonth(tempMonth,curYearNum);
+                    dayName = document.createTextNode(days[i] + " " + (tempDay));
+                }
+                else{
+                    tempMonth = curMonthNum;
+                    tempDay = curDayNum + i;
+                    dayName = document.createTextNode(days[i] + " " + (tempDay));
+                    
+                }
+                ulDay = document.createElement("ul");
+                for(var x = 8; x < 23; x++){
+                    timeStr = x + ":00";
+                    liDay = document.createElement("li");
+                    dayTxt = document.createTextNode(" ");
+                    $(liDay).addClass("days");
+                    $(liDay).attr("id",days[i] + " " + timeStr);
+                    $(liDay).attr("data-date", (tempMonth+1) + "/" +(tempDay) + "/" + curYearNum);
+                    $(liDay).append(dayTxt);
+                    $(ulDay).append(liDay);
+                    timeStr = x + ":30";
+                    liDay = document.createElement("li");
+                    dayTxt = document.createTextNode(" ");
+                    $(liDay).addClass("days");
+                    $(liDay).attr("id",days[i] + " " + timeStr);
+                    $(liDay).attr("data-date", (tempMonth+1) + "/" +(tempDay) + "/" + curYearNum);
+                    $(liDay).append(dayTxt);
+                    $(ulDay).append(liDay);
+                }
+                $("#" + days[i]).append(dayName);
+                $("#" + days[i]).append(ulDay);
+            }
+        }
+        
+        $(document).on("click",".days",function(){
+            console.log($(this).attr("id") + " " + $(this).attr("data-date"));
+        })
         
         $("#prev").click(function(){
+            curDayNum-=7;
+            console.log(curDayNum);
+            if(curDayNum < 1){
+                prevMonth();
+                var temp = curDayNum;
+                console.log(daysInMonth(curMonthNum+1,curYearNum));
+                curDayNum += daysInMonth(curMonthNum+1,curYearNum);
+                console.log("old Day " + curDayNum);
+            }
+            initDays();
+        });
+        
+        function prevMonth(){
             curMonthNum--;
             if(curMonthNum < 0){
                 curYearNum--;
                 curMonthNum = 11;
             }
             setCalendar();
-        });
+        };
         
-        $("#next").click(function(){
+        function nextMonth(){
             curMonthNum++;
             if(curMonthNum > 11){
                 curYearNum++;
                 curMonthNum = 0;
             }
             setCalendar();
+        }
+        
+        $("#next").click(function(){
+            curDayNum+=7;
+            console.log(curDayNum)
+            if(curDayNum > daysInMonth(curMonthNum+1,curYearNum)){
+                nextMonth();
+                curDayNum -= daysInMonth(curMonthNum,curYearNum);
+                console.log("new Day " + curDayNum);
+            }
+            initDays();
         });
         
         function initCalendar(){
             $(".days").empty();
-            nd = new Date(curYear,curMonth,1);
             setYearAndMonth(curMonth,curYear);
-            setTime();
-            setDays();
+            initDays();
+            initTime();
         }
         
         function setCalendar(){
             $(".days").empty();
-            nd = new Date(curYearNum,curMonthNum,1);
             setYearAndMonth(curMonthNum,curYearNum);
-            setTime();
-            setDays();
+            initDays();
         }
         
         function setYearAndMonth(month,year){
@@ -487,9 +498,22 @@
 //            }
 //        }
 //        
+//        $(document).on("click",".days li", function(){
+//            $("#calendarModal .modal-header").empty();
+//            console.log("Hello" + $(this).attr("id"));
+//            var dateH1 = document.createElement("h1");
+//            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
+//            $(dateH1).append(textH1);
+//            $("#calendarModal .modal-header").append(dateH1);
+//            $("#calendarModal").modal("show");
+//        })
+//        
+//        $("#Schedule").click(function(){
+//            initCalendar();
+//        });
+//        
 //        function makeSpaces(num){
 //            for(var i = 0; i < num; i++){
-//                var blank = document.createElement("li");
 //                $(".days").append(blank);
 //            }
 //        }
