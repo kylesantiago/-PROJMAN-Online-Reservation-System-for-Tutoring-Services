@@ -13,7 +13,8 @@ var UserSchema = mongoose.Schema({
         trim: true
               },
     type: String, //teacher or student
-    fullname: String //Split?
+    fullname: String, //Split?
+    address: String
 });
 
 var User = mongoose.model("User", UserSchema);

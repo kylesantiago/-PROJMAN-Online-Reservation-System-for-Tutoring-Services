@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 
 var ReservedSchema = mongoose.Schema({
+    notes: String,
     location: String,
     subject: String,
     student_id: String
