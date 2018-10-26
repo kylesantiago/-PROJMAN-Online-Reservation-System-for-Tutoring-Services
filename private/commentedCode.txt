@@ -1,0 +1,69 @@
+<!--                        <div id="weekly-schedule"></div>-->
+
+<!--
+                        <div class="month"> 
+                          <ul>
+                            <li id="prev" style="cursor: pointer">&#10094;</li>
+                            <li id="next" style="cursor: pointer">&#10095;</li>
+                            <li id="monthName">August<br><span style="font-size:18px">2017</span></li>
+                          </ul>
+                        </div>
+
+                        <ul class="weekdays">
+                            <li>Sunday</li>
+                            <li>Monday</li>
+                            <li>Tuesday</li>
+                            <li>Wednesday</li>
+                            <li>Thursday</li>
+                            <li>Friday</li>
+                            <li>Saturday</li>
+                        </ul>
+                        
+                        <ul class="days">
+                        </ul>
+-->
+
+//        $("#weekly-schedule").dayScheduleSelector({
+//          /*
+//          OPTIONS HERE
+//          */
+//        });
+
+//        
+//        function addDays(num){
+//            for(var i = 0; i < num; i++){
+//                var day = document.createElement("li");
+//                var text = document.createTextNode(i+1);
+//                if(i+1 == curDay && curMonthNum == curMonth){
+//                    var span = document.createElement("span");
+//                    $(span).addClass("active");
+//                    $(span).append(text);
+//                    $(day).append(span);
+//                }
+//                else{
+//                    $(day).append(text);
+//                }
+//                $(day).attr("id",i+1);
+//                $(".days").append(day);
+//            }
+//        }
+//        
+//        $(document).on("click",".days li", function(){
+//            $("#calendarModal .modal-header").empty();
+//            console.log("Hello" + $(this).attr("id"));
+//            var dateH1 = document.createElement("h1");
+//            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
+//            $(dateH1).append(textH1);
+//            $("#calendarModal .modal-header").append(dateH1);
+//            $("#calendarModal").modal("show");
+//        })
+//        
+//        $("#Schedule").click(function(){
+//            initCalendar();
+//        });
+//        
+//        function makeSpaces(num){
+//            for(var i = 0; i < num; i++){
+//                $(".days").append(blank);
+//            }
+//        }

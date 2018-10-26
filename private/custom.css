@@ -1,4 +1,6 @@
-body {
+/*  GENERAL    */
+
+body,html {
     background-size: cover;
     width:100%;
     height:100%;
@@ -7,12 +9,32 @@ body {
 
 @colors{
     dark-blue:#031D40;
+    regular-blue:#003377;
+    $blue:    #007bff !default; // primary
 }
 
-img.logo{
-    display: block;
-    margin:0 auto;
+.bg-custom, .btn-custom{
+    color:white;
+    background-color: #031D40;
 }
+
+.btn-custom:hover{
+    transition-property:all;
+    transition-duration:.5s;
+    transition-timing-function: ease;
+    background-color: #072c5d;
+}
+
+.row.list-box{
+    margin-top:5%;
+}
+
+#logoutModal .modal-content{
+    text-align: center;
+    padding:20px;
+}
+
+/*  LANDING PAGE    */
 
 .wrapper{
     position:absolute;
@@ -28,34 +50,30 @@ img.logo{
     width:100%;
 }
 
-.card{
+.wrapper .card{
     background-color: rgba(255,255,255,.5);
     border:none;
 }
 
 #particles-js{
-  width: 100%;
-  height: 100%;
-  background-image: url('');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-image: url('');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
-.bg-custom, .btn-custom{
-    color:white;
-    background-color: #031D40;
-}
+/*  SIDE NAVBAR */
 
-.btn-custom:hover{
-    transition-property:all;
-    transition-duration:.5s;
-    transition-timing-function: ease;
-    background-color: #072c5d;
+img.logo{
+    display: block;
+    margin:0 auto;
 }
 
 #sidebar{
     height:100%;
+    min-height: 100%;
 }
 
 #sidebar a{
@@ -84,9 +102,7 @@ img.logo{
     font-size: 30px;
 }
 
-.row.list-box{
-    margin-top:8%;
-}
+/*  ADMIN MANAGE TUTEES */
 
 .tuteeProfile{
     border:1px solid #d1d1d1;
@@ -121,51 +137,199 @@ img.logo{
     margin-right:1px;
 }
 
+/*  ADMIN BILLING   */
+
 #adminBilling td, th{
     width:10%;
 }
 
-.tableDiv{
+#adminBilling .tableDiv{
     height:250px;
     overflow:scroll;
 }
 
-.staticHead{
+#adminBilling .staticHead{
     margin-bottom:0;
 }
 
-.paid {
+#adminBilling .paid {
     color:#02a202;
 }
 
-.pending{
+#adminBilling .pending{
     color:#e52727;
 }
 
-.receiptDiv{
+#adminBilling .receiptDiv{
     height:300px;
     margin-top:10px;
 }
 
-.card{
+#adminBilling .card{
     border:1px solid #d1d1d1;
     height:100%;
 }
 
-tr.selected{
+#adminBilling tr.selected{
     background-color: #003377;
     color:white;
 }
 
-#logoutModal .modal-content{
-    text-align: center;
-    padding:20px;
+/*  ADMIN MANAGE RESERVATIONS   */
+
+#adminRes td, th{
+    width:10%;
 }
 
-.fas{
+#adminRes .tableDiv{
+    height:250px;
+    overflow:scroll;
+}
+
+#adminRes .staticHead{
+    margin-bottom:0;
+}
+
+#adminRes .sessionDiv{
+    height:300px;
+    margin-top:10px;
+}
+
+#adminRes .card{
+    border:1px solid #d1d1d1;
+    height:100%;
+}
+
+#adminRes tr.selected{
+    background-color: #003377;
+    color:white;
+}
+
+/* ICONS */
+
+.fas, .far{
     margin:5px;
 }
 
 .fa-check{
     color:green;
+}
+
+/* WEEKLY CALENDAR */
+
+.schedule-header{
+    text-align: center;
+}
+
+.schedule-rows td {
+    width: 70px;
+    height: 20px;
+    cursor: pointer;
+    border:1px solid #031D40;
+}
+
+.schedule-rows td:first-child {
+    background-color: transparent;
+    text-align: right;
+    cursor:default;
+    border:none;
+    padding-right: 10px;
+}
+
+.schedule-table{
+    font-size:15px;
+    width:750px;
+    overflow: hidden;
+    display:inline-block;
+}
+
+.schedule-rows td, .schedule-rows th{
+    position: relative;
+}
+
+.schedule-rows td:not(:first-child):hover::after { 
+    background-color:rgba(158, 194, 230, 0.62);
+    height: 10000px;    
+    content:'';
+    left: 0;
+    position: absolute;  
+    top: -5000px;
+    width: 100%;
+    z-index: -1;        
+}
+
+.schedule-rows td[data-selected], .schedule-rows td[data-selecting] {
+    background-color: #031D40;
+}
+
+.schedule-rows td[data-disabled]{
+    opacity: 0.55;
+    color:white;
+}
+
+/*    USER SESSIONS   */
+
+.card-columns{
+    height:auto;
+    display: block;
+}
+
+#userSessions .card, #userBilling .card{
+    max-width: 18rem;
+    height: auto;
+}
+
+#userSessions .card.pending .card-header{
+    background-color: #003377;
+}
+
+#userSessions .card.confirmed .card-header{
+    background-color: #007700;
+}
+
+.badge-confirmed{
+    background-color: #007700;
+}
+
+.badge-pending{
+    background-color: #003377;
+}
+
+.badge{
+    color:white;
+}
+
+.card .btn{
+    margin-bottom:15px;
+}
+
+.input-group{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-check{
+    margin-left: 20px;
+}
+
+/*  USER BILLING    */
+
+#userBilling .card.due .card-header{
+    background-color: #e5be19;
+}
+
+#userBilling .card.overdue .card-header{
+    background-color: #e57f19;
+}
+
+.badge-due{
+    background-color: #e5be19;
+}
+
+.badge-overdue{
+    background-color: #e57f19;
+}
+
+.badge-light{
+    color:black;
 }

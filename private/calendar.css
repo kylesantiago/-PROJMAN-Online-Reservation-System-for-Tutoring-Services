@@ -1,0 +1,98 @@
+#userSchedule ul, #adminSchedule ul{
+    list-style-type: none;
+}
+
+#userSchedule, #adminSchedule{
+    font-size: 12px;
+}
+
+/* Month header */
+.month {
+    width: 100%;
+    text-align: center;
+}
+
+/* Month list */
+.month h4{
+    margin:0;
+}
+
+.month ul {
+    margin: 0;
+    padding: 10;
+    background-color: #003377;
+    color:white;
+}
+
+.month ul li {
+    
+}
+
+/* Previous button inside month header */
+.month #prev {
+    float: left;
+    font-size: 1.9vw;
+}
+
+/* Next button */
+.month #next {
+    float: right;
+    font-size: 1.9vw;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin: 0;
+    background-color:#ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    text-align: left;
+}
+
+/* Days (1-31) */
+.days {
+    background-color: #eee;
+    width:100%;
+}
+
+.days li {
+    display: inline-block;
+    text-align: center;
+        
+}
+
+.days:hover{
+    background-color: #031D40;
+}
+
+/* Highlight the "current" day */
+.days li .active {
+    background: #1abc9c;
+    color: white !important;
+}
+
+.col-sm{
+    padding:0;
+}
+
+.col-sm ul{
+    width:100%;
+    padding:0;
+}
+
+.calendar{
+    text-align: center;
+    width:100%;
+    margin:0 auto;
+}
+
+.calTime{
+    background-color: #003377;
+    color:white;
+}
+
+.selected{
+    background-color: #031D40;
+}

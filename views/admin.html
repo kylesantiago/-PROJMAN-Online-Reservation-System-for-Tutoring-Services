@@ -9,77 +9,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <script src="../private/bootstrap4.1/js/bootstrap.min.js"></script>
         <script src="../private/weeklysched/src/index.js"></script>
-<!--   This is for the calendar    -->
-        <style>
-            ul {list-style-type: none;}
-            /* Month header */
-            .month {
-                width: 100%;
-                text-align: center;
-            }
+        <!-- CALENDAR -->
+        <link href="../private/calendar.css" rel="stylesheet">
 
-            /* Month list */
-            .month ul {
-                margin: 0;
-                padding: 0;
-            }
-
-            .month ul li {
-                font-size: 20px;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-            }
-
-            /* Previous button inside month header */
-            .month #prev {
-                float: left;
-                padding-top: 10px;
-            }
-
-            /* Next button */
-            .month #next {
-                float: right;
-                padding-top: 10px;
-            }
-
-            /* Weekdays (Mon-Sun) */
-            .weekdays {
-                margin: 0;
-                padding: 10px 0;
-                background-color:#ddd;
-            }
-
-            .weekdays li {
-                display: inline-block;
-                width: 13.6%;
-                color: #666;
-                text-align: center;
-            }
-
-            /* Days (1-31) */
-            .days {
-                padding: 0px 0;
-                background: #eee;
-            }
-
-            .days li {
-                list-style-type: none;
-                display: inline-block;
-                width: 5%;
-                text-align: center;
-                margin-bottom: 5px;
-                font-size:14px;
-                color: #777;
-            }
-
-            /* Highlight the "current" day */
-            days li .active {
-                padding: 5px;
-                background: #1abc9c;
-                color: white !important;
-            }
-            
-        </style>
     </head>
     <body>
         <div class="row">
@@ -101,58 +33,118 @@
             <div class="col-9">
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="adminSchedule">
-<!--                        <div id="weekly-schedule"></div>-->
-                        <div class="month">
-                            <ul>
-                                <li id="prev" style="cursor: pointer">&#10094;</li>
-                                <li id="next" style="cursor: pointer">&#10095;</li>
-                                <li id="monthName">August<br><span>2017</span></li>
-                            </ul>
+                        <div class="row list-box">
+                            <div class="col-10">
+                                <h2>Schedule</h2>
+                                <div class="month">
+                                    <ul>
+                                        <h4>
+                                            <li id="prev" style="cursor: pointer">&#10094;</li>
+                                            <li id="next" style="cursor: pointer">&#10095;</li>
+                                            <li id="monthName">August <span>2017</span></li>
+                                        </h4>
+                                    </ul>
+                                </div>
+                                <div class="calendar row">
+                                    <div class="col-sm">Time
+                                        <ul id="time">
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm" id="Sun">
+                                    </div>
+                                    <div class="col-sm" id="Mon">
+                                    </div>
+                                    <div class="col-sm" id="Tue">
+                                    </div>
+                                    <div class="col-sm" id="Wed">
+                                    </div>
+                                    <div class="col-sm" id="Thu">
+                                    </div>
+                                    <div class="col-sm" id="Fri">
+                                    </div>
+                                    <div class="col-sm" id="Sat">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="adminRes">
+                        <div class="row list-box">
+                            <div class="col-11">
+                                <h2>Tutoring Sessions</h2>
+                                <table class="table staticHead">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Venue*</th>
+                                            <th scope="col">Repeating</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div class="tableDiv">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th>11/03/2018</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>AAVA</td>
+                                                <td class="paid">None</td>
+                                            </tr>
+                                            <tr class="selected">
+                                                <th scope="row">11/07/2018</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>AAVA</td>
+                                                <td class="paid">None</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">11/12/2018</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Alabang Hills</td>
+                                                <td class="pending">Weekly</td>
+                                            </tr>
+                                            <tr>
+                                                <th>11/03/2018</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>AAVA</td>
+                                                <td class="paid">None</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">11/07/2018</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>AAVA</td>
+                                                <td class="paid">None</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">11/12/2018</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Alabang Hills</td>
+                                                <td class="pending">Weekly</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>               
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm">Time
-                                <ul id="time">
-                                </ul>
-                            </div>
-                            <div class="col-sm" id="Sunday">
-                            </div>
-                            <div class="col-sm" id="Monday">
-                            </div>
-                            <div class="col-sm" id="Tuesday">
-                            </div>
-                            <div class="col-sm" id="Wednesday">
-                            </div>
-                            <div class="col-sm" id="Thursday">
-                            </div>
-                            <div class="col-sm" id="Friday">
-                            </div>
-                            <div class="col-sm" id="Saturday">
-                            </div>
-                        </div>
-<!--
-                        <div class="month"> 
-                          <ul>
-                            <li id="prev" style="cursor: pointer">&#10094;</li>
-                            <li id="next" style="cursor: pointer">&#10095;</li>
-                            <li id="monthName">August<br><span style="font-size:18px">2017</span></li>
-                          </ul>
-                        </div>
+                            <div class="col-11 sessionDiv">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Session Information
+                                    </div>
+                                    <div class="card-body">
+                                        Name: Juanita dela Cruz<br/>
 
-                        <ul class="weekdays">
-                            <li>Sunday</li>
-                            <li>Monday</li>
-                            <li>Tuesday</li>
-                            <li>Wednesday</li>
-                            <li>Thursday</li>
-                            <li>Friday</li>
-                            <li>Saturday</li>
-                        </ul>
-                        
-                        <ul class="days">
-                        </ul>
--->
+                                        Date: 11/07/2018<br/>
+                                        Venue: AAVA<br/><br/>
+                                        Notes: Midterms on algebra this week<br/>
+                                        Repeating: None<br/><br/>
+                                        <button class="btn btn-outline-danger">Mark as done / cancel (rolo confirm)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="adminRes">reservations</div>
                     <div class="tab-pane fade" id="adminTutees">
                         <div class="row list-box">
                             <div class="col-5">
@@ -260,7 +252,7 @@
                                     </div>
                                     <div class="card-body">
                                         Name: Juanita dela Cruz<br/>
-                                        
+
                                         Rate: Php1000/session<br/>
                                         Session/s overdue: 1<br/><br/>
                                         Total due: Php 1000<br/>
@@ -287,239 +279,9 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Cancel</button>
                         <button type="button" class="btn btn-custom"><i class="fas fa-sign-out-alt"></i>Logout</button>
                     </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="calendarModal">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-            
-                    </div>
-                    <div class="modal-body">
-                    
-                    </div>
                 </div>
             </div>
         </div>
     </body>
-    <script>
-        
-//        $("#weekly-schedule").dayScheduleSelector({
-//          /*
-//          OPTIONS HERE
-//          */
-//        });
-        
-        var months = new Array(12);
-        months[0] = "January";
-        months[1] = "Febuary";
-        months[2] = "March";
-        months[3] = "April";
-        months[4] = "May";
-        months[5] = "June";
-        months[6] = "July";
-        months[7] = "August";
-        months[8] = "September";
-        months[9] = "October";
-        months[10] = "November";
-        months[11] = "December";
-        
-        n = new Date();        
-        var curMonth = n.getMonth();
-        var curDay = n.getDate();
-        var curYear = n.getFullYear();
-        // This is the distance from the current month
-        var curMonthNum = curMonth;
-        var curYearNum = curYear;
-        var curDayNum = curDay - n.getDay();
-        
-        var days = new Array(7);
-        days[0] = "Sunday";
-        days[1] = "Monday";
-        days[2] = "Tuesday";
-        days[3] = "Wednesday";
-        days[4] = "Thursday";
-        days[5] = "Friday";
-        days[6] = "Saturday";
-        
-        initCalendar();
-        
-        function initTime(){
-            $("#time").empty();
-            var timeStr;
-            for(var i = 8; i < 23; i++){
-                timeStr = i + ":00";
-                var liTime = document.createElement("li");
-                var timeTxt = document.createTextNode(timeStr);
-                $(liTime).append(timeTxt);
-                $("#time").append(liTime);
-                timeStr = i + ":30";
-                var liTime = document.createElement("li");
-                var timeTxt = document.createTextNode(timeStr);
-                $(liTime).append(timeTxt);
-                $("#time").append(liTime);
-            }
-        }
-        
-        function initDays(){
-            var dayName;
-            var ulDay;
-            var liDay;
-            var dayTxt;
-            var tempMonth;
-            var tempDay;
-            var timeStr;
-            for(var i = 0; i <7; i++){
-                $("#" + days[i]).empty();
-                if(curDayNum + i > daysInMonth(curMonthNum+1,curYearNum)){
-                    tempMonth = curMonthNum + 1;
-                    tempDay = curDayNum + i - daysInMonth(tempMonth,curYearNum);
-                    dayName = document.createTextNode(days[i] + " " + (tempDay));
-                }
-                else{
-                    tempMonth = curMonthNum;
-                    tempDay = curDayNum + i;
-                    dayName = document.createTextNode(days[i] + " " + (tempDay));
-                    
-                }
-                ulDay = document.createElement("ul");
-                for(var x = 8; x < 23; x++){
-                    timeStr = x + ":00";
-                    liDay = document.createElement("li");
-                    dayTxt = document.createTextNode(" ");
-                    $(liDay).addClass("days");
-                    $(liDay).attr("id",days[i] + " " + timeStr);
-                    $(liDay).attr("data-date", (tempMonth+1) + "/" +(tempDay) + "/" + curYearNum);
-                    $(liDay).append(dayTxt);
-                    $(ulDay).append(liDay);
-                    timeStr = x + ":30";
-                    liDay = document.createElement("li");
-                    dayTxt = document.createTextNode(" ");
-                    $(liDay).addClass("days");
-                    $(liDay).attr("id",days[i] + " " + timeStr);
-                    $(liDay).attr("data-date", (tempMonth+1) + "/" +(tempDay) + "/" + curYearNum);
-                    $(liDay).append(dayTxt);
-                    $(ulDay).append(liDay);
-                }
-                $("#" + days[i]).append(dayName);
-                $("#" + days[i]).append(ulDay);
-            }
-        }
-        
-        $(document).on("click",".days",function(){
-            console.log($(this).attr("id") + " " + $(this).attr("data-date"));
-        })
-        
-        $("#prev").click(function(){
-            curDayNum-=7;
-            console.log(curDayNum);
-            if(curDayNum < 1){
-                prevMonth();
-                var temp = curDayNum;
-                console.log(daysInMonth(curMonthNum+1,curYearNum));
-                curDayNum += daysInMonth(curMonthNum+1,curYearNum);
-                console.log("old Day " + curDayNum);
-            }
-            initDays();
-        });
-        
-        function prevMonth(){
-            curMonthNum--;
-            if(curMonthNum < 0){
-                curYearNum--;
-                curMonthNum = 11;
-            }
-            setCalendar();
-        };
-        
-        function nextMonth(){
-            curMonthNum++;
-            if(curMonthNum > 11){
-                curYearNum++;
-                curMonthNum = 0;
-            }
-            setCalendar();
-        }
-        
-        $("#next").click(function(){
-            curDayNum+=7;
-            console.log(curDayNum)
-            if(curDayNum > daysInMonth(curMonthNum+1,curYearNum)){
-                nextMonth();
-                curDayNum -= daysInMonth(curMonthNum,curYearNum);
-                console.log("new Day " + curDayNum);
-            }
-            initDays();
-        });
-        
-        function initCalendar(){
-            $(".days").empty();
-            setYearAndMonth(curMonth,curYear);
-            initDays();
-            initTime();
-        }
-        
-        function setCalendar(){
-            $(".days").empty();
-            setYearAndMonth(curMonthNum,curYearNum);
-            initDays();
-        }
-        
-        function setYearAndMonth(month,year){
-            $("#monthName").empty();
-            var mon = document.createTextNode(months[month]);
-            var yer = document.createTextNode(year);
-            var brk = document.createElement("br");
-            var span = document.createElement("span");
-            $(span).attr("style","font-size:18px");
-            $("#monthName").append(mon);
-            $("#monthName").append(brk);
-            $("#monthName").append(span);
-            $("#monthName").append(yer);
-        }
-//        
-//        function addDays(num){
-//            for(var i = 0; i < num; i++){
-//                var day = document.createElement("li");
-//                var text = document.createTextNode(i+1);
-//                if(i+1 == curDay && curMonthNum == curMonth){
-//                    var span = document.createElement("span");
-//                    $(span).addClass("active");
-//                    $(span).append(text);
-//                    $(day).append(span);
-//                }
-//                else{
-//                    $(day).append(text);
-//                }
-//                $(day).attr("id",i+1);
-//                $(".days").append(day);
-//            }
-//        }
-//        
-//        $(document).on("click",".days li", function(){
-//            $("#calendarModal .modal-header").empty();
-//            console.log("Hello" + $(this).attr("id"));
-//            var dateH1 = document.createElement("h1");
-//            var textH1 = document.createTextNode(months[curMonthNum] +"/"+ $(this).attr("id") +"/"+ curYearNum);
-//            $(dateH1).append(textH1);
-//            $("#calendarModal .modal-header").append(dateH1);
-//            $("#calendarModal").modal("show");
-//        })
-//        
-//        $("#Schedule").click(function(){
-//            initCalendar();
-//        });
-//        
-//        function makeSpaces(num){
-//            for(var i = 0; i < num; i++){
-//                $(".days").append(blank);
-//            }
-//        }
-        
-        function daysInMonth (month, year) {
-            return new Date(year, month, 0).getDate();
-        }
-    </script>
+    <script src="../private/calendar.js"></script>
 </html>
