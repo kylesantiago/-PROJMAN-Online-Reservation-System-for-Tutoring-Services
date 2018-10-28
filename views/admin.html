@@ -70,76 +70,121 @@
                     </div>
                     <div class="tab-pane fade" id="adminRes">
                         <div class="row list-box">
-                            <div class="col-11">
-                                <h2>Tutoring Sessions</h2>
-                                <table class="table staticHead">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Venue*</th>
-                                            <th scope="col">Repeating</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <div class="tableDiv">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                            <tr>
-                                                <th>11/03/2018</th>
-                                                <td>Juan dela Cruz</td>
-                                                <td>AAVA</td>
-                                                <td class="paid">None</td>
-                                            </tr>
-                                            <tr class="selected">
-                                                <th scope="row">11/07/2018</th>
-                                                <td>Juanita dela Cruz</td>
-                                                <td>AAVA</td>
-                                                <td class="paid">None</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">11/12/2018</th>
-                                                <td>Isobel dela Cruz</td>
-                                                <td>Alabang Hills</td>
-                                                <td class="pending">Weekly</td>
-                                            </tr>
-                                            <tr>
-                                                <th>11/03/2018</th>
-                                                <td>Juan dela Cruz</td>
-                                                <td>AAVA</td>
-                                                <td class="paid">None</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">11/07/2018</th>
-                                                <td>Juanita dela Cruz</td>
-                                                <td>AAVA</td>
-                                                <td class="paid">None</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">11/12/2018</th>
-                                                <td>Isobel dela Cruz</td>
-                                                <td>Alabang Hills</td>
-                                                <td class="pending">Weekly</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>               
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-11 sessionDiv">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Session Information
+                            <div class="col-4">
+                                <h2>Pending & Waitlist</h2>
+                                <h5>
+                                    <span class="badge badge-pending">Pending</span>
+                                    <span class="badge badge-waitlist">Waitlist</span>
+                                </h5>
+                                <div class="card-columns pwList">
+                                    <div class="card pending">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Pending session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        Name: Juanita dela Cruz<br/>
+                                    <div class="card pending">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Pending session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card waitlist">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Waitlisted session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card waitlist">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Waitlisted session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="row tableRow">
+                                    <h2>Tutoring Sessions</h2>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Hide old sessions
+                                        </label>
+                                    </div>
 
-                                        Date: 11/07/2018<br/>
-                                        Venue: AAVA<br/><br/>
-                                        Notes: Midterms on algebra this week<br/>
-                                        Repeating: None<br/><br/>
-                                        <button class="btn btn-outline-danger">Mark as done / cancel (rolo confirm)</button>
+
+                                    <table class="table staticHead">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Venue*</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <div class="tableDiv">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th>11/03/2018</th>
+                                                    <td>Juan dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr class="selected">
+                                                    <th scope="row">11/07/2018</th>
+                                                    <td>Juanita dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/12/2018</th>
+                                                    <td>Isobel dela Cruz</td>
+                                                    <td>Alabang Hills</td>
+                                                    <td class="pending">Weekly</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>11/03/2018</th>
+                                                    <td>Juan dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/07/2018</th>
+                                                    <td>Juanita dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/12/2018</th>
+                                                    <td>Isobel dela Cruz</td>
+                                                    <td>Alabang Hills</td>
+                                                    <td class="pending">Weekly</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>    
+                                <div class="row sessionDiv">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Session Information
+                                        </div>
+                                        <div class="card-body">
+                                            Name: Juanita dela Cruz<br/>
+
+                                            Date: 11/07/2018<br/>
+                                            Venue: AAVA<br/><br/>
+                                            Notes: Midterms on algebra this week<br/>
+                                            Repeating: None<br/><br/>
+                                            <button class="btn btn-outline-danger">Mark as done / cancel (rolo confirm)</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

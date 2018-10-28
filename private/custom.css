@@ -178,12 +178,13 @@ img.logo{
 /*  ADMIN MANAGE RESERVATIONS   */
 
 #adminRes td, th{
-    width:10%;
+    width:19%;
 }
 
 #adminRes .tableDiv{
     height:250px;
     overflow:scroll;
+    width:100%;
 }
 
 #adminRes .staticHead{
@@ -195,14 +196,49 @@ img.logo{
     margin-top:10px;
 }
 
-#adminRes .card{
-    border:1px solid #d1d1d1;
-    height:100%;
+#adminRes .sessionDiv .card{
+    width:100%;
+}
+
+#adminRes .pwList .card{
+    width: 18rem;
+    height:auto;
+}
+
+#adminRes .pwList{
+    overflow-y: scroll;
+    display:flex;
+    flex-direction: column;
+    max-height:600px;
+}
+
+#adminRes .card.pending .card-header{
+    background-color: #003377;
+}
+
+#adminRes .card.waitlist .card-header{
+    background-color: #878c91;
+}
+
+#adminRes .badge-waitlist{
+    background-color: #878c91;
+}
+
+#adminRes .badge-pending{
+    background-color: #003377;
 }
 
 #adminRes tr.selected{
     background-color: #003377;
     color:white;
+}
+
+#adminRes .tableRow{
+    display:block;
+}
+
+#adminRes .tableRow .form-check{
+    margin:2%;
 }
 
 /* ICONS */
@@ -269,7 +305,7 @@ img.logo{
 
 /*    USER SESSIONS   */
 
-.card-columns{
+#userSessions .card-columns{
     height:auto;
     display: block;
 }
@@ -287,11 +323,11 @@ img.logo{
     background-color: #007700;
 }
 
-.badge-confirmed{
+#userSessions .badge-confirmed{
     background-color: #007700;
 }
 
-.badge-pending{
+#userSessions .badge-pending{
     background-color: #003377;
 }
 
