@@ -31,6 +31,7 @@ var Student = mongoose.model("Student", StudentSchema);
 var exports = module.exports = {}
 
 exports.schema = StudentSchema
+exports.model = Student
 
 exports.addNew = function(student){
     return new Promise(function(resolve, reject){

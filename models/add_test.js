@@ -1,5 +1,4 @@
-require("./../config/database.js")
-
+//require("./../config/database.js")
 const Tutor = require("./tutor.js")
 const Student = require("./student.js")
 const Slot = require("./slot.js")

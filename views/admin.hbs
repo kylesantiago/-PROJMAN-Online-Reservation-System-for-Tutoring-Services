@@ -1,0 +1,337 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../bootstrap4.1/css/bootstrap.min.css"> 
+        <script src="../bootstrap4.1/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="../custom.css">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+
+        <script src="../jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <script src="../bootstrap4.1/js/bootstrap.min.js"></script>
+        <script src="../weeklysched/src/index.js"></script>
+        <!-- CALENDAR -->
+        <link href="../calendar.css" rel="stylesheet">
+        
+        <script src="../admin.js"></script>
+
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills bg-custom" id="sidebar">
+                    <li class="sidebar-brand">    
+                        <img src="../logo_white.png" width="100" height="100" class="logo">
+                        <a href="#">
+                            Welcome back,<br/><span>Admin</span>
+                        </a>
+                    </li>
+                    <a class="nav-link active" data-toggle="tab" href="#adminSchedule">Schedule</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminRes">Manage Reservations</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminTutees">Manage Tutees</a>
+                    <a class="nav-link" data-toggle="tab" href="#adminBilling">Manage Billing</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="adminSchedule">
+                        <div class="row list-box">
+                            <div class="col-10">
+                                <h2>Schedule</h2>
+                                <div class="month">
+                                    <ul>
+                                        <h4>
+                                            <li id="prev" style="cursor: pointer">&#10094;</li>
+                                            <li id="next" style="cursor: pointer">&#10095;</li>
+                                            <li id="monthName">August <span>2017</span></li>
+                                        </h4>
+                                    </ul>
+                                </div>
+                                <div class="calendar row">
+                                    <div class="col-sm">Time
+                                        <ul id="time">
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm" id="Sun">
+                                    </div>
+                                    <div class="col-sm" id="Mon">
+                                    </div>
+                                    <div class="col-sm" id="Tue">
+                                    </div>
+                                    <div class="col-sm" id="Wed">
+                                    </div>
+                                    <div class="col-sm" id="Thu">
+                                    </div>
+                                    <div class="col-sm" id="Fri">
+                                    </div>
+                                    <div class="col-sm" id="Sat">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="adminRes">
+                        <div class="row list-box">
+                            <div class="col-4">
+                                <h2>Pending & Waitlist</h2>
+                                <h5>
+                                    <span class="badge badge-pending">Pending</span>
+                                    <span class="badge badge-waitlist">Waitlist</span>
+                                </h5>
+                                <div class="card-columns pwList">
+                                    <div class="card pending">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Pending session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card pending">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Pending session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card waitlist">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Waitlisted session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card waitlist">
+                                        <div class="card-header"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Waitlisted session</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="row tableRow">
+                                    <h2>Tutoring Sessions</h2>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Hide old sessions
+                                        </label>
+                                    </div>
+
+
+                                    <table class="table staticHead">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Venue*</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <div class="tableDiv">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                <tr>
+                                                    <th>11/03/2018</th>
+                                                    <td>Juan dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr class="selected">
+                                                    <th scope="row">11/07/2018</th>
+                                                    <td>Juanita dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/12/2018</th>
+                                                    <td>Isobel dela Cruz</td>
+                                                    <td>Alabang Hills</td>
+                                                    <td class="pending">Weekly</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>11/03/2018</th>
+                                                    <td>Juan dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/07/2018</th>
+                                                    <td>Juanita dela Cruz</td>
+                                                    <td>AAVA</td>
+                                                    <td class="paid">None</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">11/12/2018</th>
+                                                    <td>Isobel dela Cruz</td>
+                                                    <td>Alabang Hills</td>
+                                                    <td class="pending">Weekly</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>    
+                                <div class="row sessionDiv">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Session Information
+                                        </div>
+                                        <div class="card-body">
+                                            Name: Juanita dela Cruz<br/>
+
+                                            Date: 11/07/2018<br/>
+                                            Venue: AAVA<br/><br/>
+                                            Notes: Midterms on algebra this week<br/>
+                                            Repeating: None<br/><br/>
+                                            <button class="btn btn-outline-danger">Mark as done / cancel (rolo confirm)</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="adminTutees">
+                        <div class="row list-box">
+                            <div class="col-5">
+                                <h2>Tutees</h2>
+                                <div class="list-group">
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-home">
+                                        <h4>Juan dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-profile">
+                                        <h4>Juanita dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </a>
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-messages">
+                                        <h4>Isobel dela Cruz</h4>
+                                        <h6>PAREF Woodrose</h6>
+                                    </a>
+                                </div>
+                                <button class="btn btn-success">Add Account<i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="col-7">
+                                <div class="tab-content tuteeProfile">
+                                    <div class="tab-pane fade" id="list-home">
+                                        <h4>Juan dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-profile">
+                                        <h4>Juanita dela Cruz</h4>
+                                        <h6>De La Salle Zobel</h6>
+                                    </div>
+                                    <div class="tab-pane fade" id="list-messages">
+                                        <h4>Isobel dela Cruz</h4>
+                                        <h6>PAREF Woodrose</h6>
+                                    </div>
+                                </div>
+                                <button class="btn btn-custom tuteeBtn"><i class="fas fa-edit"></i>Edit</button>
+                                <button class="btn btn-warning tuteeBtn"><i class="fas fa-coins"></i>Bill</button>
+                                <button class="btn btn-danger tuteeBtn"><i class="far fa-times-circle"></i>Disable</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="adminBilling">
+                        <div class="row list-box">
+                            <div class="col-11">
+                                <h2>Billing</h2>
+                                <table class="table staticHead">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Bill #</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Fee</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div class="tableDiv">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th>1</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr class="selected">
+                                                <th scope="row">2</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Php 1200</td>
+                                                <td class="pending">Pending</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Juan dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Juanita dela Cruz</td>
+                                                <td>Php 1000</td>
+                                                <td class="paid">Paid</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Isobel dela Cruz</td>
+                                                <td>Php 1200</td>
+                                                <td class="pending">Pending</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 receiptDiv">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Digital Receipt #2
+                                    </div>
+                                    <div class="card-body">
+                                        Name: Juanita dela Cruz<br/>
+
+                                        Rate: Php1000/session<br/>
+                                        Session/s overdue: 1<br/><br/>
+                                        Total due: Php 1000<br/>
+                                        Status: Paid<i class="fas fa-check"></i><br/><br/>
+                                        <button class="btn btn-outline-danger"><i class="fas fa-undo"></i>Revert status</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!------ MODALS HERE ------->
+        <div class="modal fade" id="logoutModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="../logo_blue.png" width="100" height="100" class="logo">
+                        <h5>Are you sure you want to logout?</h5>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Cancel</button>
+                        <a href="logout">
+                            <button type="button" class="btn btn-custom"><i class="fas fa-sign-out-alt"></i>Logout</button>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../calendar.js"></script>
+</html>

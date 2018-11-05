@@ -24,6 +24,7 @@ var Tutor = mongoose.model("Tutor", TutorSchema);
 var exports = module.exports = {}
 
 exports.schema = TutorSchema
+exports.model = Tutor
 
 exports.addNew = function(tutor){
     return new Promise(function(res, rej){

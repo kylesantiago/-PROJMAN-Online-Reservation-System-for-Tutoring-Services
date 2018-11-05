@@ -140,7 +140,7 @@ img.logo{
 /*  ADMIN BILLING   */
 
 #adminBilling td, th{
-    width:10%;
+    width:19%;
 }
 
 #adminBilling .tableDiv{
@@ -185,6 +185,10 @@ img.logo{
     height:250px;
     overflow:scroll;
     width:100%;
+}
+
+#adminRes .tableDiv:hover{
+    cursor:pointer;
 }
 
 #adminRes .staticHead{

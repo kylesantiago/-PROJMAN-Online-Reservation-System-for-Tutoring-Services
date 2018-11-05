@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const bodyparser = require("body-parser")
-//const session= require("express-session")
+const session= require("express-session")
 const cookieparser = require("cookie-parser")
 /*
 const MemeService = require("../models/memeService")
@@ -28,6 +28,25 @@ router.get("/",(req,res)=>{
     console.log("GET /")
     let user = req.session.user
     res.render("index.hbs")
+})
+
+// LOGIN USER
+router.post("/loginSuccess", urlencoder, (req,res)=>{
+    res.render("admin.hbs")
+})
+
+// AJAX ROUTE TO CHECK CREDENTIALS
+router.post("/login", urlencoder, (req,res)=>{
+    // check for account
+    res.send({
+        result:"success"
+    })
+})
+
+// LOGOUT USER
+router.get("/logout", (req,res)=>{
+    req.session.destroy()
+    res.redirect("/")
 })
 
 module.exports = router

@@ -18,6 +18,7 @@ var Slot = mongoose.model("Slot", SlotSchema);
 var exports = module.exports = {}
 
 exports.schema = SlotSchema
+exports.model = Slot
 
 exports.addNew = function(slot){
     return new Promise(function(resolve, reject){
