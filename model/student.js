@@ -53,3 +53,26 @@ exports.getAll = function(){
         })
     })
 }
+
+/**
+** Add new reserved_slots given tutor_id and slot_id
+**/
+exports.addReserved = function(student_id, reserved_id){
+    return new Promise(function(res, rej){
+        Student.findOne({
+            _id: student_id
+        }).update({}, {
+            $addToSet: {
+                reserved_slots: reserved_id
+            }
+            
+        }, {multi: true
+    }).then((succ) => {
+            console.log("Add Reserved Succ")
+            res(succ)
+        }, (err) => {
+            console.log("Add Reserved Failed")
+            rej(err)
+        })
+    })
+}

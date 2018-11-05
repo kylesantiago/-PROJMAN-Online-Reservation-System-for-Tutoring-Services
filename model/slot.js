@@ -9,7 +9,8 @@ var SlotSchema = mongoose.Schema({
     tutor_id: String,
     student_id: String,
     notes: String,
-    location: String
+    location: String,
+    status: String //Approved, Pending, Denied
 });
 
 var Slot = mongoose.model("Slot", SlotSchema);
