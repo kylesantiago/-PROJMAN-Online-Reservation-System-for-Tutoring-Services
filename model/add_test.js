@@ -6,10 +6,6 @@ const Slot = require("./slot.js")
 var tutor;
 var add_tutors = new Promise(
     function (resolve, reject) {
-        //    var array_studs = ["Sammie Dacanay", "Nea Tan", "Vivian Uy"]
-
-        //    var array_blocked = ["QWERTY", "ABCDEF"]
-        //    var arary_slots = ["ASDFG", "ZXCVB"]
 
         var slot
 
