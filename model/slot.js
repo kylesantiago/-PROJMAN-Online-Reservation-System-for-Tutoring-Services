@@ -2,9 +2,8 @@
 const mongoose = require("mongoose");
 
 var SlotSchema = mongoose.Schema({
-    id: String, //might be for testing? we can also use the proper _id later
     start_time: String, //? 00:00 to 23:59
-    intervals: int, //15 minute intervals
+    intervals: Number, //15 minute intervals
     date: String, //? Format: YYYY-MM-DD
     type: String, //reserved or blocked
     tutor_id: String,

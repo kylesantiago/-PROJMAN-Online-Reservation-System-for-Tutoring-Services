@@ -26,26 +26,35 @@ var exports = module.exports = {}
 exports.schema = TutorSchema
 
 exports.addNew = function(tutor){
-    return new Tutor(function(resolve, reject){
+    return new Promise(function(res, rej){
     var x = new Tutor(tutor)
     x.save().then((newItem)=>{
-      resolve(newItem)
+      res(newItem)
     }, (err)=>{
-      reject(err)
+      rej(err)
     })
   })
 }
 
-exports.findSpecific = function (tutor){
+/**
+** Add new blocked given tutor_id and blocked_id
+**/
+exports.addBlocked = function(tutor_id, block_id){
     return new Promise(function(res, rej){
-        User.findOne(
-            {email: tutor
+        Tutor.findOne({
+            _id: tutor_id
+        }).update({}, {
+            $addToSet: {
+                blocked_slots: block_id
             }
-        ).then((founduser)=>{
-            res(founduser)
-        }, (err)=>{
-            console.log("ERROR")
+            
+        }, {multi: true
+    }).then((succ) => {
+            console.log("Add Block Succ")
+            res(succ)
+        }, (err) => {
+            console.log("Add Block Failed")
             rej(err)
-        })  
-    }) 
+        })
+    })
 }

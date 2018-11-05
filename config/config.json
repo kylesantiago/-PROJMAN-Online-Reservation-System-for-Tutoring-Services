@@ -1,0 +1,9 @@
+{
+    "port": 3000,
+    "views": "/views/",
+    "static": "/views/static",
+    "key": "CHANGEKEYSOON",
+    "database": {
+      "uri": "mongodb://localhost:27017/tutoring_service"
+    }
+}

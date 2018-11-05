@@ -17,8 +17,8 @@ var StudentSchema = mongoose.Schema({
         required: true,
         trim: true
               },
-    rate: int,
-    hours: int,
+    rate: Number,
+    hours: Number,
     contact_info: String, //phone number?
     tutor: String,
     reserved_slots: [String], //ID to of the slots reserved by the student
