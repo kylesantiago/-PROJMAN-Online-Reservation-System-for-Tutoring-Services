@@ -1,0 +1,68 @@
+Tutor:
+{
+    email: "abc@yahoo.com",
+    password: "123",
+    blocked_slots: [
+    {
+        start_time: "10:00",
+        intervals: 5,
+        date: "2018-12-25",
+        type: "blocked",
+        tutor_id: tutor._id,
+        student_id: null,
+        notes: "It's Christmas Day",
+        location: tutor.address
+    },
+    {
+        start_time: "00:00",
+        intervals: (4 * 24), //whole day
+        date: "2018-11-14",
+        type: "blocked",
+        tutor_id: tutor._id,
+        student_id: null,
+        notes: "It's My Birth Day",
+        location: "847 Fire Drive, Harry Poter City"
+    }
+    ],
+    fullname: "Mica Pena",
+    address: "837 Elm Street, AAVA Muntinlupa City"
+}
+
+Student:
+{
+    email: "rolopens@gmail.com",
+    password: "123",
+    school: "DLSU",
+    rate: 500,
+    hours: 3,
+    contact_info: "09175723300", //phone number?
+    tutor: "Mica Pena", //tutor name or id?
+    fullname: "Romeo Manuel N. Pena",
+    address: "24 JP Laurel St. BF HOMES EAST PHASE VI LAS PINAS CITY"
+    reserved_slots: [
+        {
+            start_time: "10:00",
+            intervals: 5,
+            date: "2018-12-23",
+            type: "reserved",
+            tutor_id: tutor._id,
+            student_id: student._id,
+            notes: "Calculus",
+            location: null,
+            status: "Approved"
+        }, 
+        {
+            start_time: "10:00",
+            intervals: 5,
+            date: "2018-11-13",
+            type: "reserved",
+            tutor_id: tutor._id,
+            student_id: student._id,
+            notes: "Physics",
+            location: null,
+            status: "Approved"
+
+        }
+
+    ]
+}
