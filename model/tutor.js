@@ -7,8 +7,15 @@ var TutorSchema = mongoose.Schema({
         required: true,
         trim: true
               },
-    students: [String], //fullname of students
-    blocked_slots: [String] //ID of the blocked slots
+    password: {
+        type: String,
+        required: true,
+        trim: true
+              },
+    students: [String], //fullname of students/ id?
+    blocked_slots: [String], //ID of the blocked slots
+    fullname: String, //so we know the name of the tutor
+    address: String //house of the tutor (can do tutoring sessions in this location)
     
 });
 

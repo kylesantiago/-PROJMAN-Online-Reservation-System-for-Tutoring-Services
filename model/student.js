@@ -7,6 +7,11 @@ var StudentSchema = mongoose.Schema({
         required: true,
         trim: true
               },
+    password: {
+        type: String,
+        required: true,
+        trim: true
+              },
     school: {
         type: String,
         required: true,
@@ -16,7 +21,9 @@ var StudentSchema = mongoose.Schema({
     hours: int,
     contact_info: String, //phone number?
     tutor: String,
-    reserved_slots: [String] //ID to of the slots reserved by the student
+    reserved_slots: [String], //ID to of the slots reserved by the student
+    fullname: String,
+    address: String
 });
 
 var Student = mongoose.model("Student", StudentSchema);
@@ -46,5 +53,3 @@ exports.getAll = function(){
         })
     })
 }
-
-exports.getSpecificTutor
