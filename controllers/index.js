@@ -17,11 +17,11 @@ const urlencoder = bodyparser.urlencoded({
 })
 app.use(cookieparser())
 
-/*
-router.use("/user", require("./user"))
-router.use("/meme", require("./meme"))
-router.use("/tag", require("./tag"))
-*/
+
+router.use("/slot", require("./slot"))
+router.use("/student", require("./student"))
+router.use("/tutor", require("./tutor"))
+
 
 // GET ALL PUBLIC MEMES
 router.get("/",(req,res)=>{
@@ -49,4 +49,5 @@ router.get("/logout", (req,res)=>{
     res.redirect("/")
 })
 
+// always remember to export the router for index.js
 module.exports = router
