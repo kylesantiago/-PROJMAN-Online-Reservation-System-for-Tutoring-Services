@@ -54,7 +54,17 @@ exports.getAll = function(){
         })
     })
 }
-
+exports.getSpecific = function(email,password){
+    return new Promise(function(res,rej){
+        Student.findOne({email,password}).then((succ)=>{
+            console.log("Finished Looking For Student");
+            res(succ);
+        },(err)=>{
+            console.log("Student Search Error");
+            rej(err);
+        })
+    })
+}
 /**
 ** Add new reserved_slots given tutor_id and slot_id
 **/
