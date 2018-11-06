@@ -31,19 +31,21 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body">
-                            <form action="../loginSuccess" method="post" id="loginForm">
+                            <form>
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                     <div class="invalid-feedback">Invalid credentials.</div>
                                 </div>
                                 
                                 <button id="loginBtn" class="btn btn-custom" onclick="return false">Login</button>
+                            </form>
+                            <form action="../loginSuccess" id="loginForm" method="get" class="hidden">
                             </form>
                         </div>
                     </div>

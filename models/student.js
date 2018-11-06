@@ -44,6 +44,19 @@ exports.addNew = function(student){
   })
 }
 
+exports.login = function(email,password){
+    return new Promise(function(res, rej){
+        Student.findOne({
+            email: email,
+            password: password
+        }).then((user)=>{
+            res(user)
+        }, (err)=>{
+            rej(err)
+        })
+    })
+}
+
 exports.getAll = function(){
     return new Promise(function(res, rej){
         Student.find().then((items)=>{

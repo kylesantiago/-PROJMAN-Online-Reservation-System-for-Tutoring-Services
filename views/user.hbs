@@ -217,26 +217,7 @@
                 </div>
             </div>
         </div>
-
-
-        <!------ MODALS HERE ------->
-        <div class="modal fade" id="logoutModal">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="../logo_blue.png" width="100" height="100" class="logo">
-                        <h5>Are you sure you want to logout?</h5>
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Cancel</button>
-                        <a href="logout">
-                            <button type="button" class="btn btn-custom"><i class="fas fa-sign-out-alt"></i>Logout</button>
-                        </a>
-                        
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        {{> modals}}
     </body>
     <script src="../calendar.js"></script>
 </html>

@@ -17,6 +17,5 @@ function login() {
                 $("form#loginForm").submit()
             }
         }
-
     })
 }

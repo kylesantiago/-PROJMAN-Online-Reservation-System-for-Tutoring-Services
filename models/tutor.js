@@ -6,17 +6,17 @@ var TutorSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true
-              },
+    },
     password: {
         type: String,
         required: true,
         trim: true
-              },
+    },
     students: [String], //fullname of students/ id?
     blocked_slots: [String], //ID of the blocked slots
     fullname: String, //so we know the name of the tutor
     address: String //house of the tutor (can do tutoring sessions in this location)
-    
+
 });
 
 var Tutor = mongoose.model("Tutor", TutorSchema);
@@ -28,13 +28,26 @@ exports.model = Tutor
 
 exports.addNew = function(tutor){
     return new Promise(function(res, rej){
-    var x = new Tutor(tutor)
-    x.save().then((newItem)=>{
-      res(newItem)
-    }, (err)=>{
-      rej(err)
+        var x = new Tutor(tutor)
+        x.save().then((newItem)=>{
+            res(newItem)
+        }, (err)=>{
+            rej(err)
+        })
     })
-  })
+}
+
+exports.login = function(email,password){
+    return new Promise(function(res, rej){
+        Tutor.findOne({
+            email: email,
+            password: password
+        }).then((user)=>{
+            res(user)
+        }, (err)=>{
+            rej(err)
+        })
+    })
 }
 
 /**
@@ -48,9 +61,8 @@ exports.addBlocked = function(tutor_id, block_id){
             $addToSet: {
                 blocked_slots: block_id
             }
-            
         }, {multi: true
-    }).then((succ) => {
+           }).then((succ) => {
             console.log("Add Block Succ")
             res(succ)
         }, (err) => {
