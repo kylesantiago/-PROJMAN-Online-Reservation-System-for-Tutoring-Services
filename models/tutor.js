@@ -37,18 +37,6 @@ exports.addNew = function(tutor){
   })
 }
 
-exports.getSpecific = function(email,password){
-    return new Promise(function(res,rej){
-        Tutor.findOne({email,password}).then((succ)=>{
-            console.log("Finished Looking For Tutor");
-            res(succ);
-        },(err)=>{
-            console.log("Tutor Search Error");
-            rej(err);
-        })
-    })
-}
-
 /**
 ** Add new blocked given tutor_id and blocked_id
 **/
