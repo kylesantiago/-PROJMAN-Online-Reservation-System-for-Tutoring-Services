@@ -90,3 +90,20 @@ exports.addReserved = function(student_id, reserved_id){
         })
     })
 }
+
+/**
+** Finds a student given a name
+**/
+exports.findStudent_name = function(name){
+    return new Promise(function(res, rej){
+        Student.findOne({
+            fullname: name
+        }).then((succ) => {
+            console.log("Add Reserved Succ")
+            res(succ)
+        }, (err) => {
+            console.log("Add Reserved Failed")
+            rej(err)
+        })
+    })
+}

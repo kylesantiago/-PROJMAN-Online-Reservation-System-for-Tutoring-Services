@@ -10,7 +10,15 @@ var SlotSchema = mongoose.Schema({
     student_id: String,
     notes: String,
     location: String,
-    status: String //Approved, Pending, Denied
+    status: String, //Approved, Pending, Waitlisted
+    paid: {
+        type: Boolean,
+        default: false
+    },
+    house_fee: {
+        type: Number,
+        default: 0
+    }
 });
 
 var Slot = mongoose.model("Slot", SlotSchema);

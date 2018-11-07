@@ -26,4 +26,20 @@ function manageTutees(){
 // Zach
 function manageBilling(){
     // AJAX to retrieve billing info
+    //let name = $(".")
+    
+    $.ajax({        
+        url: '../bill',
+        method: 'GET',
+        data: {name, password },
+        success: function (res) {
+            if (res.result === 'error') {
+                $(".invalid-feedback").show()
+            }
+            else {
+                $(".invalid-feedback").hide()
+                $("form#loginForm").submit()
+            }
+        }
+    })
 }
