@@ -14,6 +14,7 @@ function login() {
                 $(".invalid-feedback").show()
             }
             else {
+                $(".invalid-feedback").hide()
                 $("form#loginForm").submit()
             }
         }

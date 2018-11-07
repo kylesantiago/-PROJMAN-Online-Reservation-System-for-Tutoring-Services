@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $("a[href='#userSchedule']").click(fixSchedule)
     $("a[href='#userSessions']").click(fixSessions)
+    
+    fixSchedule()
 })
 
 function fixSchedule(){
