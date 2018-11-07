@@ -255,58 +255,6 @@ img.logo{
     color:green;
 }
 
-/* WEEKLY CALENDAR */
-
-.schedule-header{
-    text-align: center;
-}
-
-.schedule-rows td {
-    width: 70px;
-    height: 20px;
-    cursor: pointer;
-    border:1px solid #031D40;
-}
-
-.schedule-rows td:first-child {
-    background-color: transparent;
-    text-align: right;
-    cursor:default;
-    border:none;
-    padding-right: 10px;
-}
-
-.schedule-table{
-    font-size:15px;
-    width:750px;
-    overflow: hidden;
-    display:inline-block;
-}
-
-.schedule-rows td, .schedule-rows th{
-    position: relative;
-}
-
-.schedule-rows td:not(:first-child):hover::after { 
-    background-color:rgba(158, 194, 230, 0.62);
-    height: 10000px;    
-    content:'';
-    left: 0;
-    position: absolute;  
-    top: -5000px;
-    width: 100%;
-    z-index: -1;        
-}
-
-.schedule-rows td[data-selected], .schedule-rows td[data-selecting] {
-    background-color: #031D40;
-}
-
-.schedule-rows td[data-disabled]{
-    opacity: 0.55;
-    color:white;
-}
-
 /*    USER SESSIONS   */
 
 #userSessions .card-columns{
