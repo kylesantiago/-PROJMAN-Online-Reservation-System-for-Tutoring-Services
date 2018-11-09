@@ -13,4 +13,31 @@ const urlencoder = bodyparser.urlencoded({
 })
 app.use(cookieparser())
 
+/*                  DATABASE                   */
+const Tutor = require("../models/tutor.js")
+const Student = require("../models/student.js")
+const Slot = require("../models/slot.js")
+
+/*                 CODE                 */
+router.get("/getSlots", urlencoder, (req,res)=>{
+    console.log("GET /slot/getSlots")
+    Slot.getAll().then((slots)=>{
+        res.send(slots)
+    }, (err)=>{
+        
+    })
+})
+
+router.get("/getApproved", urlencoder, (req,res)=>{
+    console.log("GET /slot/getApproved")
+    Slot.getApproved().then((slots)=>{
+        res.send(slots)
+    }, (err)=>{
+        
+    })
+})
+
+
+
+
 module.exports = router

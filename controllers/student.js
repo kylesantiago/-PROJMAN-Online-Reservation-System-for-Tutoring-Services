@@ -13,4 +13,23 @@ const urlencoder = bodyparser.urlencoded({
 })
 app.use(cookieparser())
 
+
+/*                  DATABASE                   */
+const Tutor = require("../models/tutor.js")
+const Student = require("../models/student.js")
+const Slot = require("../models/slot.js")
+
+/*                 CODE                 */
+router.post("/getByID", urlencoder, (req,res)=>{
+    console.log("GET /student/getByID" + req.body.id)
+    Student.findStudentByID(req.body.id).then((student)=>{
+        res.send(student)
+    }, (err)=>{
+        
+    })
+})
+
+
+
+
 module.exports = router

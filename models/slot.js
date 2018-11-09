@@ -41,3 +41,29 @@ exports.getAll = function(){
         })
     })
 }
+
+exports.getReserved = function(){
+    return new Promise(function(res, rej){
+        Slot.find({type: "reserved"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getApproved = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Approved"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}

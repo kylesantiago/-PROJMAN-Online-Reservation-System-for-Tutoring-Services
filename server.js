@@ -54,7 +54,7 @@ function fillDB(){
 
 /*                  ROUTES               */
 app.listen(process.env.PORT || 3000, ()=>{
-    //clearDB()
-    //fillDB()
+    clearDB()
+    fillDB()
     console.log("Now listening on port 3000...")
 })

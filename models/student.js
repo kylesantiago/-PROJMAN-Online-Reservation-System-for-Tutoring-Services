@@ -90,3 +90,14 @@ exports.addReserved = function(student_id, reserved_id){
         })
     })
 }
+
+exports.findStudentByID = function(student_id){
+    return new Promise(function(res, rej){
+        Student.findOne({_id:student_id}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+    })
+}
