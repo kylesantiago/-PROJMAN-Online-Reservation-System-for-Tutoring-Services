@@ -170,6 +170,17 @@ function addPending(slot){
             
             $(body).append(title)
             $(body).append(text)
+            
+            $(newCard).attr("slot_id", slot._id)
+            $(newCard).attr("slot_owner", res.fullname)
+            $(newCard).attr("slot_date", slot.date)
+            $(newCard).attr("slot_time", slot.start_time)
+            var dur = slot.intervals * 15
+            $(newCard).attr("slot_duration", dur)
+            $(newCard).attr("slot_location", slot.location)
+            $(newCard).attr("slot_notes", slot.notes)
+                            
+            $(newCard).attr("onclick", "updateSessionInfo(this)")
 
             $(newCard).append(header)
             $(newCard).append(body)
