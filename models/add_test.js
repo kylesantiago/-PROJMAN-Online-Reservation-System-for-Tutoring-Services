@@ -78,7 +78,7 @@ var add_students = new Promise(function(resolve, reject){
             student_id: student._id,
             notes: "Calculus",
             location: null,
-            status: "Approved"
+            status: "Waitlisted"
         }).then((returned_slot)=>{
             slot = returned_slot
             return Student.addReserved(student._id, slot._id).then((updated_student)=>{
@@ -92,7 +92,7 @@ var add_students = new Promise(function(resolve, reject){
                     student_id: student._id,
                     notes: "Physics",
                     location: null,
-                    status: "Approved"
+                    status: "Pending"
                 }).then((return_slot22)=>{
                     slot = return_slot22
                     return Student.addReserved(student._id, slot._id).then((updated_student2)=>{

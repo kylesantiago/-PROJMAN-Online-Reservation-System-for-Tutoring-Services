@@ -22,6 +22,7 @@ function fixSchedule(){
 function manageRes(){
     // AJAX to retrieve session info and format properly
     setupTutoringRow()
+    setupPendingAndWaitlist()
 }
 
 function setupTutoringRow(){
@@ -47,6 +48,7 @@ function setupTutoringRow(){
 //    addTutoringRow(slot)
 }
 
+/**         TABLE           **/
 function addTutoringRow(slot){
     
     $.ajax({
@@ -73,8 +75,14 @@ function addTutoringRow(slot){
             $(newRow).attr("slot_id", slot._id)
             $(newRow).attr("slot_owner", res.fullname)
             $(newRow).attr("slot_date", slot.date)
+            $(newRow).attr("slot_time", slot.start_time)
+            var dur = slot.intervals * 15
+            
+            $(newRow).attr("slot_duration", dur)
             $(newRow).attr("slot_location", slot.location)
             $(newRow).attr("slot_notes", slot.notes)
+            
+            
             $(newRow).attr("onclick", "selectMe(this)")
 
             $(".tbody_tutorSessions").append(newRow)
@@ -89,13 +97,98 @@ function selectMe(obj){
     $("tr").removeClass("selected")
     $(obj).addClass("selected")
 
-    updateCard(obj)
+    updateSessionInfo(obj)
 }
 
-function updateCard(obj){
+/** PENDING AND WAITLIST **/
+function setupPendingAndWaitlist(){
+    $(".card-columns.pwList").empty()
+    
+    /**     GET PENDING FIRST     **/
+    $.ajax({
+        url: '../slot/getSlots',
+        method: 'get',
+        success: function (res) {
+            res.forEach((slot)=>{
+                if(slot.status != "Approved")
+                    addPending(slot)
+                
+            })
+        }
+    })
+    
+}
+
+function addPending(slot){
+    
+    $.ajax({
+        url: '../student/getByID',
+        method: 'post',
+        data: {id: slot.student_id},
+        success: function (res) {
+            var newCard = document.createElement("div")
+            $(newCard).addClass("card")
+            
+            if(slot.status == "Pending")
+                $(newCard).addClass("pending")
+            else
+                $(newCard).addClass("waitlist")
+
+            var header = document.createElement("div")
+            $(header).addClass("card-header")
+
+            var body = document.createElement("div")
+            $(body).addClass("card-body")
+            
+            var title = document.createElement("h5")
+            $(title).addClass("card-title")
+            
+            if(slot.status == "Pending")
+                $(title).text("Pending Session")
+            else
+                $(title).text("Waitlisted Session")
+            
+            
+            var text = document.createElement("p")
+            $(text).addClass("card-text")
+            
+            var name = document.createElement("span")
+            $(name).text(res.fullname)
+
+            var date = document.createElement("span")
+            $(date).text(slot.date)
+            
+            var location = document.createElement("span")
+            $(location).text(slot.location)
+            
+            
+            $(text).append(name)
+            $(text).append("<br/>")
+            $(text).append(date)
+            $(text).append("<br/>")
+            $(text).append(location)
+            
+            $(body).append(title)
+            $(body).append(text)
+
+            $(newCard).append(header)
+            $(newCard).append(body)
+
+            $(".pwList").append(newCard)
+        }
+        
+    })
+    
+}
+
+/**     CARD        **/
+
+function updateSessionInfo(obj){
     console.log("SLOT OWNER: " + $(obj).attr("slot_owner"))
     $(".session-info.card-name").text($(obj).attr("slot_owner"))
     $(".session-info.card-date").text($(obj).attr("slot_date"))
+    $(".session-info.card-time").text($(obj).attr("slot_time"))
+    $(".session-info.card-duration").text($(obj).attr("slot_duration"))
     $(".session-info.card-location").text($(obj).attr("slot_location"))
     $(".session-info.card-notes").text($(obj).attr("slot_notes"))
 }

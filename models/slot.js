@@ -10,7 +10,7 @@ var SlotSchema = mongoose.Schema({
     student_id: String,
     notes: String,
     location: String,
-    status: String //Approved, Pending, Denied
+    status: String //Approved, Pending, Waitlisted
 });
 
 var Slot = mongoose.model("Slot", SlotSchema);
@@ -58,6 +58,32 @@ exports.getReserved = function(){
 exports.getApproved = function(){
     return new Promise(function(res, rej){
         Slot.find({status: "Approved"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getPending = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Pending"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getWaitlisted = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Waitlisted"}).then((items)=>{
             res(items)
         }, (err)=>{
             rej(err)

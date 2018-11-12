@@ -37,7 +37,14 @@ router.get("/getApproved", urlencoder, (req,res)=>{
     })
 })
 
-
+router.get("/getPending", urlencoder, (req,res)=>{
+    console.log("GET /slot/getPending")
+    Slot.getPending().then((slots)=>{
+        res.send(slots)
+    }, (err)=>{
+        
+    })
+})
 
 
 module.exports = router
