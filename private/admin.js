@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    $("a[href='#adminSchedule']").click(fixSchedule)
-    $("a[href='#adminRes']").click(manageRes)
-    $("a[href='#adminTutees']").click(manageTutees)
-    $("a[href='#adminBilling']").click(manageBilling)  
+//    //$("a[href='#adminSchedule']").click(fixSchedule)
+//    //$("a[href='#adminRes']").click(manageRes)
+//    $("a[href='#adminTutees']").click(manageTutees)
+//    $("a[href='#adminBilling']").click(manageBilling)  
     
     fixSchedule()
     manageRes()
@@ -23,6 +23,32 @@ function manageRes(){
     // AJAX to retrieve session info and format properly
     setupTutoringRow()
     setupPendingAndWaitlist()
+    setupCheckBox()
+}
+
+function setupCheckBox(){
+    $("#defaultCheck1[type='checkbox']").change(function(){
+        if($(this).prop("checked")){
+            $(".tbody_tutorSessions").empty()
+            console.log("DONT MESS UP MY TEMPO")
+            $.ajax({
+                url: '../slot/getApproved',
+                method: 'get',
+                success: function (res) {
+                    res.forEach((slot)=>{
+                        
+                        console.log("CURRENT DAY: " + Date.now() + " vs DATE OF SLOT: " + Date.parse(slot.date) )
+                        if(Date.now() <= Date.parse(slot.date))
+                            addTutoringRow(slot)
+
+                    })
+                }
+            })
+            
+        } else setupTutoringRow()
+        
+    })
+    
 }
 
 function setupTutoringRow(){
