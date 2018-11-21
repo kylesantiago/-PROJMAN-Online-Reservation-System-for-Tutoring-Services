@@ -46,5 +46,16 @@ router.get("/getPending", urlencoder, (req,res)=>{
     })
 })
 
+router.post("/update", urlencoder, (req, res)=>{
+    console.log("POST /slot/update")
+    
+    Slot.updateStatus(req.body.id, req.body.status).then((succ)=>{
+        
+    }, (err)=>{
+        
+    })
+    
+})
+
 
 module.exports = router

@@ -93,3 +93,22 @@ exports.getWaitlisted = function(){
     })
     
 }
+
+exports.updateStatus = function(slot, stat){
+    return new Promise(function(res, rej){
+        Slot.findOneAndUpdate({
+            _id:slot
+        }, {
+            status: stat
+        }).then((succ)=>{
+            console.log("Update Successful")
+            res(succ)
+        }, (err)=>{
+            console.log("Update Failed")
+            rej(err)
+        })
+        
+        
+    })
+    
+}

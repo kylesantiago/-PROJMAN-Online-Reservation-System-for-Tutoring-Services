@@ -21,9 +21,11 @@ function fixSchedule(){
 // Rolo
 function manageRes(){
     // AJAX to retrieve session info and format properly
+    console.log("V")
     setupTutoringRow()
     setupPendingAndWaitlist()
     setupCheckBox()
+    updateSessionInfo(null)
 }
 
 function setupCheckBox(){
@@ -107,7 +109,8 @@ function addTutoringRow(slot){
             $(newRow).attr("slot_duration", dur)
             $(newRow).attr("slot_location", slot.location)
             $(newRow).attr("slot_notes", slot.notes)
-            
+            $(newRow).attr("slot_status", slot.status)
+            $(newRow).attr("slot_id", slot._id)
             
             $(newRow).attr("onclick", "selectMe(this)")
 
@@ -205,6 +208,8 @@ function addPending(slot){
             $(newCard).attr("slot_duration", dur)
             $(newCard).attr("slot_location", slot.location)
             $(newCard).attr("slot_notes", slot.notes)
+            $(newCard).attr("slot_status", slot.status)
+            $(newCard).attr("slot_id", slot._id)
                             
             $(newCard).attr("onclick", "updateSessionInfo(this)")
 
@@ -221,6 +226,11 @@ function addPending(slot){
 /**     CARD        **/
 
 function updateSessionInfo(obj){
+    $(".session-info.approve").hide()
+    $(".session-info.waitlist").hide()
+    $(".session-info.approve").attr("slot-id", $(obj).attr("slot_id"))
+    $(".session-info.waitlist").attr("slot-id", $(obj).attr("slot_id"))
+    
     console.log("SLOT OWNER: " + $(obj).attr("slot_owner"))
     $(".session-info.card-name").text($(obj).attr("slot_owner"))
     $(".session-info.card-date").text($(obj).attr("slot_date"))
@@ -228,6 +238,40 @@ function updateSessionInfo(obj){
     $(".session-info.card-duration").text($(obj).attr("slot_duration"))
     $(".session-info.card-location").text($(obj).attr("slot_location"))
     $(".session-info.card-notes").text($(obj).attr("slot_notes"))
+    
+    
+    if($(obj).attr("slot_status") == "Approved"){
+        $(".session-info.waitlist").show()
+        $(".session-info.waitlist").attr("onclick", "updateSlot(this)")
+    } else if ($(obj).attr("slot_status") == "Waitlisted") {
+        $(".session-info.approve").show()
+        $(".session-info.approve").attr("onclick", "updateSlot(this)")
+    } else if ($(obj).attr("slot_status") == "Pending") {
+        $(".session-info.waitlist").show()
+        $(".session-info.waitlist").attr("onclick", "updateSlot(this)")
+
+        $(".session-info.approve").show()
+        $(".session-info.approve").attr("onclick", "updateSlot(this)")
+    }
+    
+    
+}
+
+function updateSlot(elem){
+    var slotid = $(elem).attr("slot-id")
+    var slotstatus = $(elem).attr("slot-status")
+    console.log(slotid)
+    $.ajax({
+        url: '../slot/update',
+        method: 'post',
+        data: {
+            id: slotid,
+            status: slotstatus
+        },
+        success: manageRes()
+        
+    })
+    
 }
 
 // Ian
