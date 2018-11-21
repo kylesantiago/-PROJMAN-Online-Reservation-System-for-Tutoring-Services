@@ -10,7 +10,7 @@ var SlotSchema = mongoose.Schema({
     student_id: String,
     notes: String,
     location: String,
-    status: String //Approved, Pending, Denied
+    status: String //Approved, Pending, Waitlisted
 });
 
 var Slot = mongoose.model("Slot", SlotSchema);
@@ -40,4 +40,86 @@ exports.getAll = function(){
             console.log("ERROR")
         })
     })
+}
+
+exports.getAll = function(){
+    return new Promise(function(res, rej){
+        Slot.find().then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+    })
+}
+
+exports.getReserved = function(){
+    return new Promise(function(res, rej){
+        Slot.find({type: "reserved"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getApproved = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Approved"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getPending = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Pending"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.getWaitlisted = function(){
+    return new Promise(function(res, rej){
+        Slot.find({status: "Waitlisted"}).then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+        
+    })
+    
+}
+
+exports.updateStatus = function(slot, stat){
+    return new Promise(function(res, rej){
+        Slot.findOneAndUpdate({
+            _id:slot
+        }, {
+            status: stat
+        }).then((succ)=>{
+            console.log("Update Successful")
+            res(succ)
+        }, (err)=>{
+            console.log("Update Failed")
+            rej(err)
+        })
+        
+        
+    })
+    
 }

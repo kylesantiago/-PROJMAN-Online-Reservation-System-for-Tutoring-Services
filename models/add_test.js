@@ -66,8 +66,7 @@ var add_students = new Promise(function(resolve, reject){
         tutor: "Mica Pena", //tutor name or id?
         reserved_slots: [], //ID to of the slots reserved by the student
         fullname: "Romeo Manuel N. Pena",
-        address: "24 JP Laurel St. BF HOMES EAST PHASE VI LAS PINAS CITY",
-        disabled:false
+        address: "24 JP Laurel St. BF HOMES EAST PHASE VI LAS PINAS CITY"
     }).then((returned_student)=>{
         student = returned_student;
         return Slot.addNew({
@@ -79,7 +78,7 @@ var add_students = new Promise(function(resolve, reject){
             student_id: student._id,
             notes: "Calculus",
             location: null,
-            status: "Approved"
+            status: "Waitlisted"
         }).then((returned_slot)=>{
             slot = returned_slot
             return Student.addReserved(student._id, slot._id).then((updated_student)=>{
@@ -87,13 +86,13 @@ var add_students = new Promise(function(resolve, reject){
                 return Slot.addNew({
                     start_time: "10:00",
                     intervals: 5,
-                    date: "2018-11-13",
+                    date: "2018-10-13",
                     type: "reserved",
                     tutor_id: tutor._id,
                     student_id: student._id,
                     notes: "Physics",
                     location: null,
-                    status: "Approved"
+                    status: "Pending"
                 }).then((return_slot22)=>{
                     slot = return_slot22
                     return Student.addReserved(student._id, slot._id).then((updated_student2)=>{

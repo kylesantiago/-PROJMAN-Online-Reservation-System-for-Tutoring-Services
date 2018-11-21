@@ -62,4 +62,13 @@ router.post("/editStudent", urlencoder, (req,res)=>{
     })
 })
 
+router.post("/getByID", urlencoder, (req,res)=>{
+    console.log("GET /student/getByID" + req.body.id)
+    Student.findStudentByID(req.body.id).then((student)=>{
+        res.send(student)
+    }, (err)=>{
+        
+    })
+})
+
 module.exports = router
