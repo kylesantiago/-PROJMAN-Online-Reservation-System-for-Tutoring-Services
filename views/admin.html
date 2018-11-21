@@ -194,10 +194,19 @@
                         <div class="row list-box">
                             <div class="col-5">
                                 <h2>Tutees</h2>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">
+                                        Hide disabled accounts
+                                    </label>
+                                </div>
                                 <div class="list-group">
                                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-home">
                                         <h4>Juan dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
+                                        <h6>De La Salle Zobel
+                                            <span class="badge badge-danger">Account disabled</span>
+                                        </h6>
+                                        
                                     </a>
                                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-profile">
                                         <h4>Juanita dela Cruz</h4>
@@ -208,13 +217,30 @@
                                         <h6>PAREF Woodrose</h6>
                                     </a>
                                 </div>
-                                <button class="btn btn-success">Add Account<i class="fas fa-plus"></i></button>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#addAccModal">Add Account<i class="fas fa-plus"></i></button>
                             </div>
                             <div class="col-7">
                                 <div class="tab-content tuteeProfile">
                                     <div class="tab-pane fade" id="list-home">
-                                        <h4>Juan dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
+                                        <form>
+                                            <input type="text" readonly class="form-control-plaintext form-control-lg" id="studentInfo_fullname" value="Juan dela Cruz">
+                                            <input type="text" readonly class="form-control-plaintext" id="studentInfo_school" value="De La Salle Zobel">
+                                            <span class="badge badge-danger">Account disabled</span>
+                                            <hr>
+                                            <div class="form-group">
+                                                <input type="tel" readonly class="form-control-plaintext" id="studentInfo_id" value="0917XXXXXX">
+                                                <small class="form-text text-muted">Contact #</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" readonly class="form-control-plaintext" id="studentInfo_email" value="juandelacruz@yahoo.com">
+                                                <small class="form-text text-muted">Email</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea type="text" readonly class="form-control-plaintext" id="studentInfo_address" value="">superlongaddressjejciebcieucbebciuecebciubebcuebciebc</textarea>
+                                                <small class="form-text text-muted">Address</small>
+                                            </div>
+                                        </form>
+
                                     </div>
                                     <div class="tab-pane fade" id="list-profile">
                                         <h4>Juanita dela Cruz</h4>
@@ -227,7 +253,7 @@
                                 </div>
                                 <button class="btn btn-custom tuteeBtn"><i class="fas fa-edit"></i>Edit</button>
                                 <button class="btn btn-warning tuteeBtn"><i class="fas fa-coins"></i>Bill</button>
-                                <button class="btn btn-danger tuteeBtn"><i class="far fa-times-circle"></i>Disable</button>
+                                <button class="btn btn-danger tuteeBtn" data-toggle="modal" data-target="#disableAccModal"><i class="far fa-times-circle"></i>Disable</button>
                             </div>
                         </div>
                     </div>
@@ -323,6 +349,78 @@
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"></i>Cancel</button>
                         <button type="button" class="btn btn-custom"><i class="fas fa-sign-out-alt"></i>Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addAccModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-lg fa-user-plus"></i>Add new student</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-control errForm" id="addAcc_fullname" placeholder="Juan dela Cruz">
+                                    <small id="addAcc_fullname_err" class="form-text errText">Please enter student's full name.</small>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>School</label>
+                                    <input type="text" class="form-control" id="addAcc_school" placeholder="PAREF Southridge">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" id="addAcc_email" placeholder="Email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Contact #</label>
+                                    <input type="tel" class="form-control" id="addAcc_contact" placeholder="0917XXXXXXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" class="form-control" id="addAcc_address" placeholder="1234 Main St">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="addAcc_check">
+                                    <label class="form-check-label">
+                                        Creating an account will generate a password
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        <button type="button" class="btn btn-success" id="addAccBtn">Add account<i class="fas fa-plus"></i></button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="disableAccModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-lg fa-ban"></i>Confirm account disable</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="text-center modal-body">
+                        <h4>Are you sure you want to disable <span id="studentName">Span's </span> account?</h4>
+                        <small class="form-text text-muted">Doing so will prevent login using the account credentials.</small>
+
+                        <button type="button" class="btn btn-danger" id="disableAccBtn"><i class="far fa-times-circle"></i>Disable</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>

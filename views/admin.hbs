@@ -13,9 +13,10 @@
 
         <!-- CALENDAR -->
         <link href="../calendar.css" rel="stylesheet">
-        
+
         <!-- External JS file for functionality -->
         <script src="../admin.js"></script>
+        <script src="../authentication.js"></script>
     </head>
     <body>
         <div class="row">
@@ -197,40 +198,59 @@
                         <div class="row list-box">
                             <div class="col-5">
                                 <h2>Tutees</h2>
-                                <div class="list-group">
-                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-home">
-                                        <h4>Juan dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
-                                    </a>
-                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-profile">
-                                        <h4>Juanita dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
-                                    </a>
-                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-messages">
-                                        <h4>Isobel dela Cruz</h4>
-                                        <h6>PAREF Woodrose</h6>
-                                    </a>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="hideDisabled">
+                                    <label class="form-check-label">
+                                        Hide disabled accounts
+                                    </label>
                                 </div>
-                                <button class="btn btn-success">Add Account<i class="fas fa-plus"></i></button>
+                                <div class="list-group">
+                                    {{#each students}}
+                                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#{{_id}}" data-disabled="{{disabled}}">
+                                        <h4>{{fullname}}</h4>
+                                        <h6>
+                                            <span id="schoolName">
+                                                {{school}}
+                                            </span>
+                                            {{#if disabled}}
+                                            <span class="badge badge-danger">Account disabled</span>
+                                            {{/if}}
+                                        </h6>
+                                    </a>
+                                    {{/each}}
+                                </div>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#addAccModal">Add Account<i class="fas fa-plus"></i></button>
                             </div>
                             <div class="col-7">
                                 <div class="tab-content tuteeProfile">
-                                    <div class="tab-pane fade" id="list-home">
-                                        <h4>Juan dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
+                                    {{#each students}}
+                                    <div class="tab-pane fade" id="{{_id}}">
+                                        <form>
+                                            <input type="text" readonly class="form-control form-control-plaintext form-control-lg" id="studentInfo_fullname" value="{{fullname}}">
+                                            <input type="text" readonly class="form-control form-control-plaintext" id="studentInfo_school" value="{{school}}">
+                                            {{#if disabled}}
+                                            <span class="badge badge-danger">Account disabled</span>
+                                            {{/if}}
+                                            <hr>
+                                            <div class="form-group">
+                                                <input type="tel" readonly class="form-control form-control-plaintext" id="studentInfo_contact" value="{{contact_info}}">
+                                                <small class="form-text text-muted">Contact #</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" readonly class="form-control form-control-plaintext" id="studentInfo_email" value="{{email}}">
+                                                <small class="form-text text-muted">Email</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' type="text" readonly class="form-control form-control-plaintext" id="studentInfo_address" value="{{address}}">{{address}}</textarea>
+                                                <small class="form-text text-muted">Address</small>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="tab-pane fade" id="list-profile">
-                                        <h4>Juanita dela Cruz</h4>
-                                        <h6>De La Salle Zobel</h6>
-                                    </div>
-                                    <div class="tab-pane fade" id="list-messages">
-                                        <h4>Isobel dela Cruz</h4>
-                                        <h6>PAREF Woodrose</h6>
-                                    </div>
+                                    {{/each}}
                                 </div>
-                                <button class="btn btn-custom tuteeBtn"><i class="fas fa-edit"></i>Edit</button>
+                                <button class="btn btn-custom tuteeBtn" id="studentInfo_edit"><i class="fas fa-edit" id="editIcon"></i>Edit</button>
                                 <button class="btn btn-warning tuteeBtn"><i class="fas fa-coins"></i>Bill</button>
-                                <button class="btn btn-danger tuteeBtn"><i class="far fa-times-circle"></i>Disable</button>
+                                <button class="btn btn-danger tuteeBtn" data-toggle="modal" id="studentInfo_disable" data-target="#disableAccModal"><i class="far fa-times-circle" id="disableIcon"></i>Disable</button>
                             </div>
                         </div>
                     </div>
@@ -315,6 +335,46 @@
             </div>
         </div>
         {{> modals}}
+        <!------ DISABLE ACCOUNT MODAL ------->
+        <div class="modal fade" id="disableAccModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-lg fa-ban"></i>Confirm account disable</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="text-center modal-body">
+                        <h4>Are you sure you want to disable <span class="studentName">Span's</span> account?</h4>
+                        <small class="form-text text-muted">Doing so will prevent login using the account credentials.</small>
+
+                        <button type="button" class="btn btn-danger" id="disableAccBtn"><i class="far fa-times-circle"></i>Disable</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------ ENABLE ACCOUNT MODAL ------->
+        <div class="modal fade" id="enableAccModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-lg fa-thumbs-up"></i>Confirm account enable</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="text-center modal-body">
+                        <h4>Are you sure you want to enable <span class="studentName">Span's</span> account?</h4>
+                        <small class="form-text text-muted">Doing so will permit user login using account credentials.</small>
+
+                        <button type="button" class="btn btn-custom-light" id="enableAccBtn"><i class="far fa-times-circle"></i>Enable</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
     <script src="../calendar.js"></script>
 </html>

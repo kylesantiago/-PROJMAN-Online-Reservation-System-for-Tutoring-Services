@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const path = require("path");
+mongoose.set('useFindAndModify', false);
 
 const values = require(path.join(__dirname, "config.json"));
 

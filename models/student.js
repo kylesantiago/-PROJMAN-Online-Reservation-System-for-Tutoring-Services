@@ -23,7 +23,8 @@ var StudentSchema = mongoose.Schema({
     tutor: String,
     reserved_slots: [String], //ID to of the slots reserved by the student
     fullname: String,
-    address: String
+    address: String,
+    disabled: Boolean
 });
 
 var Student = mongoose.model("Student", StudentSchema);
@@ -48,7 +49,8 @@ exports.login = function(email,password){
     return new Promise(function(res, rej){
         Student.findOne({
             email: email,
-            password: password
+            password: password,
+            disabled: false
         }).then((user)=>{
             res(user)
         }, (err)=>{
@@ -63,7 +65,42 @@ exports.getAll = function(){
             res(items)
         }, (err)=>{
             rej(err)
-            console.log("ERROR")
+        })
+    })
+}
+
+exports.toggleStatus = function(id, newStatus){
+    return new Promise(function(res, rej){
+        Student.findOneAndUpdate({
+            _id:id
+        }, {
+            disabled:newStatus
+        }, {
+            returnNewDocument:true
+        }).then((newDoc)=>{
+            res(newDoc)
+        },(err)=>{
+            rej(err)
+        })
+    })
+}
+
+exports.editStudent = function(id, newName, newSchool, newAddress, newEmail, newContact){
+    return new Promise(function(res, rej){
+        Student.findOneAndUpdate({
+            _id:id
+        }, {
+            fullname:newName,
+            email:newEmail,
+            school:newSchool,
+            contact_info:newContact,
+            address:newAddress
+        }, {
+            returnNewDocument:true
+        }).then((newDoc)=>{
+            res(newDoc)
+        },(err)=>{
+            rej(err)
         })
     })
 }

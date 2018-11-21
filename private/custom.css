@@ -18,6 +18,18 @@ body,html {
     background-color: #031D40;
 }
 
+.btn-custom-light{
+    color:white;
+    background-color: #4db270;
+}
+
+.btn-custom-light:hover{
+    transition-property:all;
+    transition-duration:.5s;
+    transition-timing-function: ease;
+    background-color: #3c9059;
+}
+
 .btn-custom:hover{
     transition-property:all;
     transition-duration:.5s;
@@ -104,7 +116,7 @@ img.logo{
 
 /*  ADMIN MANAGE TUTEES */
 
-.tuteeProfile{
+#adminTutees .tuteeProfile{
     border:1px solid #d1d1d1;
     height:550;
     width:450px;
@@ -112,7 +124,7 @@ img.logo{
     border-radius: 5px;
 }
 
-.list-group>a.active{
+#adminTutees .list-group>a.active{
     transition-property:all;
     transition-duration:.2s;
     transition-timing-function: ease;
@@ -120,21 +132,84 @@ img.logo{
     border-color: #003377;
 }
 
-.list-group{
+#adminTutees .list-group{
     min-height:100px;
     max-height:450px;
     overflow: scroll;
 }
 
-.list-box .col-5 button{
+#adminTutees .list-box .col-5 button{
     margin-top:10px;
     width:147px;
 }
 
-.tuteeBtn{
+#adminTutees .tuteeBtn{
     margin-top:10px;
     width:147px;
     margin-right:1px;
+}
+
+#adminTutees .form-control-lg{
+    font-size:1.5em;
+    margin-bottom: .5em;
+}
+
+#adminTutees .form-control-lg.form-control-plaintext{
+    font-size:1.5em;
+    margin-bottom:0;
+}
+
+#adminTutees .form-control-plaintext{
+    padding:0;
+}
+
+#adminTutees .tuteeProfile .form-control-plaintext{
+    background: none;
+}
+
+#adminTutees .tuteeProfile input.form-control-plaintext:focus, #adminTutees .tuteeProfile textarea.form-control-plaintext:focus{
+    border:none;
+    color:#212429;
+    box-shadow: none;
+}
+
+#adminTutees .badge{
+    margin-top:1em;
+}
+
+#adminTutees textarea{
+    resize:none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#adminTutees .list-group .badge{
+    float:right;
+    margin:0;
+}
+
+#adminTutees .form-check{
+    margin-bottom: 1em;
+}
+
+#addAccModal .fa-user-plus{
+    color:#031D40;
+}
+
+#addAccModal .errText{
+    color:#d81010;
+}
+
+#addAccModal .errForm{
+    border-color:#d81010;
+}
+
+#disableAccModal .modal-content small, #enableAccModal .modal-content small{
+    margin-bottom:1em;
 }
 
 /*  ADMIN BILLING   */

@@ -37,8 +37,13 @@ router.get("/loginSuccess", (req,res)=>{
     let type = req.session.type
     if (type == "Student")
         res.render("user.hbs")
-    if (type == "Tutor")
-        res.render("admin.hbs")
+    if (type == "Tutor") {
+        Student.getAll().then((students)=>{
+            res.render("admin.hbs",{
+                students
+            })
+        })
+    }
 })
 
 // LOGOUT USER

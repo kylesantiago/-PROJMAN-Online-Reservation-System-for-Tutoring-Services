@@ -66,7 +66,8 @@ var add_students = new Promise(function(resolve, reject){
         tutor: "Mica Pena", //tutor name or id?
         reserved_slots: [], //ID to of the slots reserved by the student
         fullname: "Romeo Manuel N. Pena",
-        address: "24 JP Laurel St. BF HOMES EAST PHASE VI LAS PINAS CITY"
+        address: "24 JP Laurel St. BF HOMES EAST PHASE VI LAS PINAS CITY",
+        disabled:false
     }).then((returned_student)=>{
         student = returned_student;
         return Slot.addNew({
