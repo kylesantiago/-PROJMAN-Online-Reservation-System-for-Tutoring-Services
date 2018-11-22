@@ -99,29 +99,40 @@ function initDays(){
 }
 
 function cellClick(){
-    if($(this).hasClass("blocked")){
-       removeBlock(this);
+    if($(this).hasClass("reserved")){
+        $.ajax({
+            url: "/getUser",
+            method: "post",
+            data: {
+                owner:$(this).attr("data-ownerid"),
+                slot:$(this).attr("data-slotid")
+            },
+            success: function(newdoc) {
+                removeReservation(newdoc.owner,newdoc.slot,newdoc.result);
+            }
+        });
     }
-    else{
-       createBlock(this);
+    else if (!$(this).hasClass("blocked")){
+       createReserve(this);
     }
 }
 
-function removeBlock(temp){
-    var removeHidden = document.createElement("hidden");
-    $(removeHidden).attr("data-id",$(temp).attr("data-id"));
-    $(removeHidden).attr("id","removeHidden");
-    $("#removeBlock").append(removeHidden);
-    
-    $("#removeBlockModal").modal("show");
+function removeReservation(owner,slot,ownerId){
+    if(ownerId === owner){
+        var removeHidden = document.createElement("hidden");
+        $(removeHidden).attr("data-id",slot);
+        $(removeHidden).attr("id","removeHidden");
+        $("#removeRes").append(removeHidden);
+
+        $("#removeResModal").modal("show");
+    }
 }
 
-function blockRemove(){
+function reserveRemove(){
     var id = $(document.getElementById("removeHidden")).attr("data-id");
     $(document.getElementById("removeHidden")).remove();
-    console.log(id);
     $.ajax({
-        url: "../slot/removeSlot",
+        url: "../slot/removeResSlot",
         method: "post",
         data: {
             id
@@ -130,36 +141,67 @@ function blockRemove(){
             initSlots(newdoc);
         }
     });
-    $("#removeBlockModal").modal("hide");
+    $("#removeResModal").modal("hide");
 }
 
-function createBlock(temp){
+function createReserve(temp){
     var index = time.indexOf($(temp).attr("id").split(" ")[0]);
     var date = $(temp).attr("id").split(" ")[1];
     console.log(index,date);
     var freeTimes = fillTimes(index,date);
     
-    $("#date").empty();
+    $("#rdate").empty();
     var dateText = document.createTextNode(date);
     var dateOption = document.createElement("option");
     $(dateOption).append(dateText);
-    $("#date").append(dateOption);
+    $("#rdate").append(dateOption);
     
-    $("#startTime").empty();
+    $("#rdate").empty();
+    var dateText = document.createTextNode(date);
+    var dateOption = document.createElement("option");
+    $(dateOption).append(dateText);
+    $("#rdate").append(dateOption);
+    
+    $("#rstartTime").empty();
     var startText = document.createTextNode(freeTimes[0]);
     var startOption = document.createElement("option");
     $(startOption).append(startText);
-    $("#startTime").append(startOption);
+    $("#rstartTime").append(startOption);
     
-    $("#endTime").empty();
+    $("#rendTime").empty();
     for(var i = 0; i < freeTimes.length; i++){
         var endText = document.createTextNode(freeTimes[i]);
         var endOption = document.createElement("option");
         $(endOption).append(endText);
-        $("#endTime").append(endOption);
+        $("#rendTime").append(endOption);
     }
     
-    $("#addBlockModal").modal("show");
+    getAllTutors()
+}
+
+function getAllTutors(){
+    $.ajax({
+        url: "../tutor/getAll",
+        method: "post",
+        data: {
+        },
+        success: function(newdoc) {
+            addTutors(newdoc);
+        }
+    });
+}
+
+function addTutors(list){
+    $("#rtutor").empty();
+    for(num in list){
+        var tutorText = document.createTextNode(list[num].fullname);
+        var tutorOption = document.createElement("option");
+        $(tutorOption).attr("data-id",list[num]._id);
+        $(tutorOption).append(tutorText);
+        $("#rtutor").append(tutorOption);
+    }
+    
+    $("#addResModal").modal("show");
 }
 
 function fillTimes(index,date){
@@ -167,7 +209,7 @@ function fillTimes(index,date){
     var tempSlot;
     for (var i = index; i< 30; i++){
         tempSlot = document.getElementById(time[i] + " " + date);
-        if($(tempSlot).attr("data-id")){
+        if($(tempSlot).attr("data-slotid")){
             return tempTimes;
         }
         else{
@@ -177,21 +219,24 @@ function fillTimes(index,date){
     return tempTimes;
 }
 
-function blockSubmit(){
-    $("#addBlockModal").modal("hide");
-    var startTime = $("#startTime").children("option:selected").val();
-    var endTime = $("#endTime").children("option:selected").val();
-    var note = $("#note").val();
+function reserveSubmit(){
+    $("#addResModal").modal("hide");
+    var startTime = $("#rstartTime").children("option:selected").val();
+    var endTime = $("#rendTime").children("option:selected").val();
+    var tutor = $("#rtutor").children("option:selected").attr("data-id");
+    var note = $("#rnote").val();
     var interval = time.indexOf(endTime)-time.indexOf(startTime);
-    var location = $("#location").val();
-    var date = $("#date").children("option:selected").val();
+    var location = $("#rlocation").val();
+    var date = $("#rdate").children("option:selected").val();
+    console.log(tutor);
     $.ajax({
-        url: "../slot/blockSlot",
+        url: "../slot/reserveSlot",
         method: "post",
         data: {
             startTime,
             note,
             interval,
+            tutor,
             location,
             date
         },
@@ -270,13 +315,13 @@ function initSlots(newdoc){
             var tempDay;
             for(var i = 0; i < 30; i++){
                 tempDay = document.getElementById(time[i] + " " + newdoc[doc].date);
-                $(tempDay).attr("data-id",newdoc[doc]._id);
+                $(tempDay).attr("data-slotid",newdoc[doc]._id);
                 if(newdoc[doc].type === "blocked"){
-                    
                     $(tempDay).toggleClass("blocked");
                 }
                 else{
                     $(tempDay).toggleClass("reserved");
+                    $(tempSlot).attr("data-ownerid",newdoc[doc].student_id);
                 }
             }
         }
@@ -284,29 +329,41 @@ function initSlots(newdoc){
             var tempSlot = document.getElementById(newdoc[doc].start_time+ " " + newdoc[doc].date);
             if(tempSlot){
                 if(newdoc[doc].intervals == 0){
-                    $(tempSlot).attr("data-id",newdoc[doc]._id);
+                    $(tempSlot).attr("data-slotid",newdoc[doc]._id);
                     if(newdoc[doc].type === "blocked"){
                         $(tempSlot).toggleClass("blocked");
                     }
                     else{
                         $(tempSlot).toggleClass("reserved");
+                        $(tempSlot).attr("data-ownerid",newdoc[doc].student_id);
                     }
                 }
                 else{
                     for(var i = 0; i < newdoc[doc].intervals; i++){
-                        tempSlot = document.getElementById(time[i+time.indexOf(newdoc[doc].start_time)]+ " " + newdoc[doc].date);
-                        $(tempSlot).attr("data-id",newdoc[doc]._id);
+                        tempStringId = time[i+time.indexOf(newdoc[doc].start_time)]+ " " + newdoc[doc].date;
+                        tempSlot = document.getElementById(tempStringId);
+                        $(tempSlot).attr("data-slotid",newdoc[doc]._id);
                         if(newdoc[doc].type === "blocked"){
                             $(tempSlot).toggleClass("blocked");
                         }
                         else{
                             $(tempSlot).toggleClass("reserved");
+                            $(tempSlot).attr("data-ownerid",newdoc[doc].student_id);
                         }
                     }
                 }
             }
         }
     }
+}
+
+function findOwner(students,id){
+    for(num in students){
+        if(id === students[num]._id){
+            return students[num]._id;
+        }                           
+    }
+    return null;
 }
 
 function initCalendar(){
@@ -330,11 +387,8 @@ function setYearAndMonth(month,year){
     var span = document.createElement("span");
     $(span).attr("style","font-size:18px");
     $("#monthName").append(mon);
-    //$("#monthName").append(brk);
-    //$("#monthName").append(span);
     $("#monthName").append(yer);
 }
-
 
 function daysInMonth (month, year) {
     return new Date(year, month, 0).getDate();

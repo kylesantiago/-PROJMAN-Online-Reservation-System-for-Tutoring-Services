@@ -257,82 +257,85 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="adminBilling">
-                        <div class="row list-box">
-                            <div class="col-11">
-                                <h2>Billing</h2>
-                                <table class="table staticHead">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">Bill #</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Fee</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                                <div class="tableDiv">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Juan dela Cruz</td>
-                                                <td>Php 1000</td>
-                                                <td class="paid">Paid</td>
-                                            </tr>
-                                            <tr class="selected">
-                                                <th scope="row">2</th>
-                                                <td>Juanita dela Cruz</td>
-                                                <td>Php 1000</td>
-                                                <td class="paid">Paid</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Isobel dela Cruz</td>
-                                                <td>Php 1200</td>
-                                                <td class="pending">Pending</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Juan dela Cruz</td>
-                                                <td>Php 1000</td>
-                                                <td class="paid">Paid</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Juanita dela Cruz</td>
-                                                <td>Php 1000</td>
-                                                <td class="paid">Paid</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Isobel dela Cruz</td>
-                                                <td>Php 1200</td>
-                                                <td class="pending">Pending</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>                    
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-11 receiptDiv">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Digital Receipt #2
-                                    </div>
-                                    <div class="card-body">
-                                        Name: Juanita dela Cruz<br/>
-
-                                        Rate: Php1000/session<br/>
-                                        Session/s overdue: 1<br/><br/>
-                                        Total due: Php 1000<br/>
-                                        Status: Paid<i class="fas fa-check"></i><br/><br/>
-                                        <button class="btn btn-outline-danger"><i class="fas fa-undo"></i>Revert status</button>
-                                    </div>
+                    <div class="row list-box">
+                        <div class="col-11">
+                            <h2>Billing</h2>
+                            <div class="form-radio">
+                                <div>
+                                    <input name="Billing" class="form-check-input" type="radio" value="" id="defaultCheck2" checked>
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Bill for the Week
+                                    </label>
                                 </div>
+                                <div>
+                                    <input name="Billing" class="form-check-input" type="radio" value="" id="defaultCheck3">
+                                    <label class="form-check-label" for="defaultCheck3">
+                                        Bill for the Month
+                                    </label>
+                                </div>
+                            </div>
+                            <table class="table staticHead">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Rate</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="tableDiv">
+                                <table class="table table-hover">
+                                    <tbody name="billingBody" id="billingBody">
+                                        <tr>
+                                            <td>Juan dela Cruz</td>
+                                            <td>Php 1000</td>
+                                        </tr>
+                                        <tr class="selected">
+                                            <td>Juanita dela Cruz</td>
+                                            <td>Php 1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Isobel dela Cruz</td>
+                                            <td>Php 1200</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Juan dela Cruz</td>
+                                            <td>Php 1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Juanita dela Cruz</td>
+                                            <td>Php 1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Isobel dela Cruz</td>
+                                            <td>Php 1200</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-11 receiptDiv">
+                            <table class="table staticHead">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Notes</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Amount(Pesos)</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="tableDiv">
+                                <table class="table table-hover">
+                                    <tbody name="billingDetails" id="billingDetails">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

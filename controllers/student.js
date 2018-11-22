@@ -18,6 +18,22 @@ const urlencoder = bodyparser.urlencoded({
 })
 app.use(cookieparser())
 
+// Start of Kyle
+router.post("/getAll",(req,res)=>{
+    console.log("POST student/getAll");
+    Student.getAll().then((result)=>{
+        if(result){
+            res.send(result);
+        }
+        else{
+            console.log("No Students");
+        }
+    },(err)=>{
+        console.log("Error in getting slots");
+    });
+})
+// End of Kyle
+
 router.post("/addAcc", urlencoder, (req,res)=>{
     Student.addNew({
         email: req.body.addAcc_email,

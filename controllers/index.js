@@ -60,6 +60,7 @@ router.post("/login", urlencoder, (req,res)=>{
     Tutor.login(req.body.email,req.body.password).then((tutor)=>{
         if (tutor) {
             req.session.type = "Tutor"
+            req.session.userId = tutor._id;
             res.send({
                 result:"success"
             })
@@ -67,6 +68,7 @@ router.post("/login", urlencoder, (req,res)=>{
             Student.login(req.body.email,req.body.password).then((student)=>{
                 if (student) {
                     req.session.type = "Student"
+                    req.session.userId = student._id;
                     res.send({
                         result:"success"
                     })
@@ -78,6 +80,10 @@ router.post("/login", urlencoder, (req,res)=>{
             })
         }
     })
+})
+
+router.post("/getUser", urlencoder, (req,res)=>{
+    res.send({result:req.session.userId,owner:req.body.owner,slot:req.body.slot});
 })
 
 module.exports = router

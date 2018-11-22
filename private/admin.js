@@ -13,14 +13,27 @@ $(document).ready(function () {
     $("#enableAccBtn").click(toggleDisable)
     $("button#studentInfo_disable").click(changeName)
 
+
+    /// KYlE
     fixSchedule()
+
+    // ZACH
     manageRes()
 })
 
 // Kyle
 function fixSchedule(){
     // AJAX to retrieve slots and fix schedule
-    $(".calendar li").removeClass("selected")
+    $(".calendar li").removeClass("selected");
+    $.ajax({
+        url: "../slot/getSlots",
+        method: "post",
+        data: {
+        },
+        success: function(newdoc) {
+            initSlots(newdoc);
+        }
+    });
 }
 
 // Zach
@@ -275,7 +288,6 @@ function updateSlot(elem){
         success: manageRes()
         
     })
-    
 }
 
 // Ian
@@ -432,6 +444,196 @@ function toggleDisable(event){
 }
 
 // Rolo
+var slotsFromServer, students = {
+    objectID: 12345
+}
+var weekTrue = true,
+    monthTrue = true
+
 function manageBilling(){
     // AJAX to retrieve billing info
+    getStudentsfortheWeek()
+    $("tbody[name='billingBody']").empty()
+    $("input[id='defaultCheck2']").click(displayButtonWeek)
+    $("input[id='defaultCheck3']").click(displayButtonMonth)
+}
+
+//functions needed for billling
+
+function displayButtonWeek() {
+    $("tbody[name='billingDetails']").empty()
+    if (weekTrue) {
+        weekTrue = false;
+        monthTrue = true;
+        getStudentsfortheWeek()
+    }
+
+}
+
+function displayButtonMonth() {
+    $("tbody[name='billingDetails']").empty()
+    if (monthTrue) {
+        weekTrue = true;
+        monthTrue = false;
+        getStudentsfortheMonth()
+    }
+}
+
+function getStudentsfortheWeek() {
+    $.ajax({
+        method: 'get',
+        url: '/slot/getStudentsWeek',
+        contentType: 'application/json',
+        success: function (results) {
+            students = {
+                objectID: 12345
+            }
+            $("tbody[name='billingBody']").empty()
+            slotsFromServer = results
+            for (var i = 0; i < slotsFromServer.length; i++) {
+                getStudentsNameViaID(slotsFromServer[i])
+            }
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function getStudentsfortheMonth() {
+    $.ajax({
+        method: 'get',
+        url: '/slot/getStudentsMonth',
+        contentType: 'application/json',
+        success: function (results) {
+            students = {
+                objectID: 12345
+            }
+            $("tbody[name='billingBody']").empty()
+            slotsFromServer = results
+            for (var i = 0; i < slotsFromServer.length; i++) {
+                getStudentsNameViaID(slotsFromServer[i])
+            }
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+function getStudentsNameViaID(slotObject) {
+
+    $.ajax({
+        method: 'get',
+        url: '/slot/getStudent/' + slotObject.student_id,
+        contentType: 'application/json',
+        success: function (result) {
+            var nameOfStudent = result.fullname
+            if (students.hasOwnProperty(nameOfStudent)) {
+                students[nameOfStudent].slots.push(slotObject)
+            } else {
+                students[nameOfStudent] = {
+                    name: result.fullname,
+                    slots: [slotObject],
+                    rate: result.rate
+                }
+            }
+            console.log(students)
+            displayOnStudentBillingOnHtml()
+
+        },
+        error: function (err) {
+            console.log(err)
+            nameOfStudent = 'error'
+        }
+    })
+
+}
+
+//todo function for adding elements into billing
+function displayOnStudentBillingOnHtml() {
+//    console.log("HELLO!!")
+     $("tbody[name='billingBody']").empty()
+
+    for (var key in students) {
+//        console.log("BEFORE IF STATEMENT " + key)
+        
+        if (key != 'objectID') {
+           
+            var element1, element2, element3, element4
+            element1 = document.createElement("tr");
+            element2 = document.createElement("td");
+            element3 = document.createElement("td");
+
+            $(element2).text(students[key].name)
+            $(element3).text(students[key].rate + " PHP/HOUR")
+
+            element1.append(element2)
+            element1.append(element3)
+            $(element1).attr("onClick", "clickOnRowFunction(this)")
+            $("tbody[name='billingBody']").append(element1)
+
+        }
+    }
+}
+
+function clickOnRowFunction(element1){
+    var totalAmt = 0
+    var nodes = document.getElementById("billingDetails").childNodes
+    var nodesOfBody = document.getElementById("billingBody").childNodes
+    
+    for (var i = 0; i < nodesOfBody.length; i++){
+        $(nodesOfBody[i]).attr("class", "")
+    }
+    $(element1).attr("class", "selected")
+    key = element1.childNodes[0].textContent
+    
+    
+    $("tbody[name='billingDetails']").empty()
+    var ratePerInterval = 0.25 * students[key].rate
+    var element0, element2, element3, element4, element5, element6, total
+    students[key].slots.forEach(function(item){
+        element0 = document.createElement("tr");
+        element2 = document.createElement("td");
+        element3 = document.createElement("td");
+        element4 = document.createElement("td");
+        element5 = document.createElement("td");
+        element6 = document.createElement("td");
+        
+        $(element2).text(item.notes)
+        $(element3).text(item.date)
+        var duration = item.intervals / 4.0 
+        $(element4).text(duration)
+        $(element5).text(item.location)
+        total = item.intervals * ratePerInterval
+        $(element6).text(total)
+        
+        element0.append(element2)
+        element0.append(element3)
+        element0.append(element4)
+        element0.append(element5)
+        element0.append(element6)
+        $("tbody[name='billingDetails']").append(element0)
+        totalAmt = totalAmt + total
+    })
+    //console.log(total)
+    
+    //for sub total
+    element0 = document.createElement("tr");
+    element2 = document.createElement("td");
+    element3 = document.createElement("td");
+    element4 = document.createElement("td");
+    element5 = document.createElement("td");
+    element6 = document.createElement("td");
+    $(element2).text("Sub-Total: ")
+    $(element6).text(totalAmt)
+    element0.append(element2)
+    element0.append(element3)
+    element0.append(element4)
+    element0.append(element5)
+    element0.append(element6)
+    $("tbody[name='billingDetails']").append(element0)
+    
 }

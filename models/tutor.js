@@ -71,3 +71,35 @@ exports.addBlocked = function(tutor_id, block_id){
         })
     })
 }
+
+// Start of Kyle
+exports.getAll = function(){
+    return new Promise(function(res, rej){
+        Tutor.find().then((items)=>{
+            res(items)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+    })
+}
+
+exports.removeBlocked = function(tutor_id,block_id){
+    return new Promise(function(res, rej){
+        Tutor.findOne({
+            _id: tutor_id
+        }).update({}, {
+            $pull: {
+                blocked_slots: block_id
+            }
+        }, {multi: true
+           }).then((succ) => {
+            console.log("Remove Block Succ")
+            res(succ)
+        }, (err) => {
+            console.log("Remove Block Failed")
+            rej(err)
+        })
+    })
+}
+// End of Kyle

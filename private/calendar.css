@@ -96,3 +96,11 @@
 .selected{
     background-color: #031D40;
 }
+
+.blocked{
+    background-color: darkgray;
+}
+
+.reserved{
+    background-color: crimson;
+}

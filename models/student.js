@@ -161,3 +161,37 @@ exports.findStudentByID = function(student_id){
         })
     })
 }
+
+// Start of Kyle 
+exports.removeReserved = function(student_id,block_id){
+    return new Promise(function(res, rej){
+        Student.findOne({
+            _id: student_id
+        }).update({}, {
+            $pull: {
+                reserved_slots: block_id
+            }
+        }, {multi: true
+           }).then((succ) => {
+            console.log("Remove Reserved Succ")
+            res(succ)
+        }, (err) => {
+            console.log("Remove Reserved Failed")
+            rej(err)
+        })
+    })
+}
+// End of Kyle
+
+exports.getStudentViaID = function(_id){
+    return new Promise(function(res, rej){
+        Student.findOne({
+            _id
+        }).then((student)=>{
+            res(student)
+        }, (err)=>{
+            rej(err)
+            console.log("ERROR")
+        })
+    })
+}
